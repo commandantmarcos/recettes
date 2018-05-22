@@ -33,14 +33,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String INGREDIENT_NAME = "name";
 
     // TABLE STEP
-    public static final String TABLE_STEP_NAME = "step";
+    public static final String TABLE_STEP_NAME = "Step";
     public static final String STEP_ID_STEP = "id_step";
     public static final String STEP_STEP_NUM = "step_num";
     public static final String STEP_URL_STEP = "url_step";
     public static final String STEP_STEP_DESCRIBE = "step_describe";
 
     // TABLE RECIPE
-    public static final String TABLE_RECIPE_NAME = "recipe";
+    public static final String TABLE_RECIPE_NAME = "Recipe";
     public static final String RECIPE_ID_RECIPE = "id_recipe";
     public static final String RECIPE_NAME_RECIPE = "name_recipe";
     public static final String RECIPE_URL_PICTURE = "url_picture";
@@ -48,14 +48,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String RECIPE_SERVINGS_COUNT = "servings_count";
 
     // TABLE USER
-    public static final String TABLE_USER_NAME = "user";
+    public static final String TABLE_USER_NAME = "User";
     public static final String USER_ID_USER = "id_user";
     public static final String USER_LOGIN = "login";
     public static final String USER_EMAIL = "email";
     public static final String USER_PASSWORD = "password";
 
     // TABLE HAVE
-    public static final String TABLE_HAVE_NAME = "have";
+    public static final String TABLE_HAVE_NAME = "Have";
     public static final String HAVE_INGR_COUNT = "ingr_count";
 
     /****************************
