@@ -6,7 +6,7 @@ import java.util.List;
 public class Recipe {
 
     private int id_recipe;
-    private String name;
+    private String name_recipe;
     private String url_picture;
     private float total_time;
     private int servings_count;
@@ -17,7 +17,7 @@ public class Recipe {
 
     public Recipe(int id_recipe, String name, String url_picture, float total_time, int servings_count, User user, Recipe_type dish_type, List<Have> listIngredient, List<Step> steps) {
         this.id_recipe = id_recipe;
-        this.name = name;
+        this.name_recipe = name_recipe;
         this.url_picture = url_picture;
         this.total_time = total_time;
         this.servings_count = servings_count;
@@ -36,7 +36,7 @@ public class Recipe {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name_recipe = name_recipe;
     }
 
     public void setUrl_picture(String url_picture) {
@@ -72,7 +72,7 @@ public class Recipe {
     }
 
     public String getName() {
-        return name;
+        return name_recipe;
     }
 
     public String getUrl_picture() {
