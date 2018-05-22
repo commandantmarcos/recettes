@@ -30,12 +30,15 @@ public class Adapter extends RecyclerView.Adapter<ViewHolders>{
     public void onBindViewHolder(ViewHolders holder, int position) {
         Recipe myObject = list.get(position);
         holder.bind(myObject);
-
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public Recipe getPosition(int position){
+        return this.list.get(position);
     }
 
 }
