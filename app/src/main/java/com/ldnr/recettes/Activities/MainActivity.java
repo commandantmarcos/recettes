@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
 		recipes.add(r1);
 		int displayMode = getResources().getConfiguration().orientation;
 
-		/*if(displayMode == 1) {*/
+		if(displayMode == 1) {
 			//définit l'agencement des cellules, ici de façon verticale, comme une ListView
 			recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		//} else {
+		} else {
 
 			//pour adapter en grille comme une RecyclerView, avec 2 cellules par ligne
-			//recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-		//}
+			recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+		}
 
 		//puis créer un MyAdapter, lui fournir notre liste de villes.
 		//cet adapter servira à remplir notre recyclerview
