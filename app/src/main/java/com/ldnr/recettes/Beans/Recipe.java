@@ -15,7 +15,7 @@ public class Recipe {
     private List<Have> listIngredient;
     private List<Step> steps;
 
-    public Recipe(int id_recipe, String name, String url_picture, float total_time, int servings_count, User user, Recipe_type dish_type, List<Have> listIngredient, List<Step> steps) {
+    public Recipe(int id_recipe, String name_recipe, String url_picture, float total_time, int servings_count, User user, Recipe_type dish_type, List<Have> listIngredient, List<Step> steps) {
         this.id_recipe = id_recipe;
         this.name_recipe = name_recipe;
         this.url_picture = url_picture;
