@@ -3,6 +3,7 @@ package com.ldnr.recettes.DAO;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.ldnr.recettes.Beans.Recipe_type;
 
@@ -34,11 +35,16 @@ public class Recipe_typeDAO extends DAO implements IRecipe_typeDAO {
     @Override
     public Recipe_type find(int id) {
         open();
-        cursor = database.rawQuery( "select " + allColumns + " from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.RECIPE_TYPE_ID_TYPE + " = " + id + " ; ", null );
+        Log.d("HERE TYPEDAO !!!!!", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_RECIPE_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
         cursor.moveToFirst();
 
         if( cursor != null && cursor.moveToFirst() ) {
-            recipe_type = new Recipe_type( (cursor.getInt(cursor.getColumnIndex(dbHelper.RECIPE_TYPE_ID_TYPE))), (cursor.getString(cursor.getColumnIndex(dbHelper.RECIPE_TYPE_TYPE_NAME))) ) ;
+            int idType = (cursor.getInt(cursor.getColumnIndex(dbHelper.RECIPE_TYPE_ID_TYPE)));
+            Cursor cursor2 = database.rawQuery("select * from " + dbHelper.TABLE_RECIPE_TYPE_NAME + " WHERE " + dbHelper.RECIPE_TYPE_ID_TYPE + " = " + idType, null);
+
+            if( cursor2 != null && cursor2.moveToFirst() )
+                recipe_type = new Recipe_type( idType, (cursor2.getString(cursor2.getColumnIndex(dbHelper.RECIPE_TYPE_TYPE_NAME))) ) ;
         }
         cursor.close();
 
