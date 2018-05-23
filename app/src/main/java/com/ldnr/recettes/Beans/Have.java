@@ -3,10 +3,10 @@ package com.ldnr.recettes.Beans;
 public class Have {
 
     private Ingredient ingredient;
-    private int number;
+    private String number;
     private String unity;
 
-    public Have(Ingredient ingredient, int number, String unity) {
+    public Have(Ingredient ingredient, String number, String unity) {
 
         this.ingredient = ingredient;
         this.number = number;
@@ -25,11 +25,11 @@ public class Have {
         this.ingredient = ingredient;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

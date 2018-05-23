@@ -26,13 +26,7 @@
             android:id="@+id/bbox_ingredients"
             android:layout_width="266dp"
             android:layout_height="wrap_content"
-            android:visibility="visible" />
-
-        <Spinner
-            android:id="@+id/bbox_unity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@id/bbox_unity"
+            android:hint="Selectionnez un ingrédient"
             android:visibility="visible" />
 
         <EditText
@@ -46,13 +40,26 @@
             android:visibility="visible"
             tools:textSize="10sp" />
 
-    </LinearLayout>
+        <Spinner
+            android:id="@+id/bbox_unity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@id/bbox_unity"
+            android:hint="Selectionnez une unité"
+            android:visibility="visible" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:text="Ajouter"
-        android:visibility="visible" />
+    </LinearLayout>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="Ajouter" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="235dp"
+            android:layout_height="37dp"
+            android:text="Nouvel Ingredient"
+            android:visibility="visible" />
 
 </LinearLayout>
