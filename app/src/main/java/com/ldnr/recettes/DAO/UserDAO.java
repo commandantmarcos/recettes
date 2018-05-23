@@ -64,7 +64,7 @@ public class UserDAO extends DAO implements IUserDAO {
     @Override
     public User find(int id) {
         open();
-        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME, null );
+        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
         // On positionne notre curseur en première position
         cursor.moveToFirst();
         // Tant qu’on est pas arrivé à la fin de nos enregistrements :
