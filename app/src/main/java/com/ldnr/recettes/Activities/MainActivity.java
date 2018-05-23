@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	// 1 - Configure item click on RecyclerView
-	private void configureOnClickRecyclerView(){
+	private void configureOnClickRecyclerView() {
 		ItemClickSupport.addTo(recyclerView, R.layout.cell_cards)
 				.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
 					@Override
@@ -78,4 +78,17 @@ public class MainActivity extends AppCompatActivity {
 					}
 				});
 	}
+
+	public void onConnectClicked(View view) {
+		Intent loginIntent = new Intent(this, LoginActivity.class);
+		startActivity(loginIntent);
+
+	}
+	public void onCreateLoginClicked(View view) {
+		Intent createLoginIntent = new Intent(this, CreateLoginActivity.class);
+		startActivity(createLoginIntent);
+
+	}
+
+
 }

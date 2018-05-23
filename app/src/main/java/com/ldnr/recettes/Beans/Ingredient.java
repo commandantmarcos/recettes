@@ -27,8 +27,8 @@ public class Ingredient {
         this.name_ingr = name_ingr;
     }
 
-    public Ingredient(int id_ingredient) {
+    public Ingredient(String name_ingr) {
 
-        this.id_ingredient = id_ingredient;
+        this.name_ingr = name_ingr;
     }
 }
