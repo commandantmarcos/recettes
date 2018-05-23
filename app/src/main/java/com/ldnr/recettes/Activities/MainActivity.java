@@ -15,7 +15,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.ldnr.recettes.Beans.Ingredient;
 import com.ldnr.recettes.Beans.Recipe;
+import com.ldnr.recettes.Beans.Step;
+import com.ldnr.recettes.Beans.User;
+import com.ldnr.recettes.DAO.IngredientDAO;
+import com.ldnr.recettes.DAO.RecipeDAO;
+import com.ldnr.recettes.DAO.StepDAO;
+import com.ldnr.recettes.DAO.UserDAO;
 import com.ldnr.recettes.R;
 import com.ldnr.recettes.Views.Adapter;
 import com.ldnr.recettes.Views.ItemClickSupport;
@@ -26,20 +33,31 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 	private RecyclerView recyclerView;
 	private List<Recipe> recipes = new ArrayList<>();
+	private List<User> users = new ArrayList<>();
+	private List<Ingredient> ingredients = new ArrayList<>();
+	private List<Step> steps = new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_main);
-		Recipe r = new Recipe(1, "Marmelade", "https://www.telegraph.co.uk/travel/destination/article130148.ece/ALTERNATES/w620/parisguidetower.jpg", 3, 4);
-		Recipe r1 = new Recipe(2, "Orange", "https://www.mesinspirationsculinaires.com/wp-content/uploads/2014/12/marmelade-dorange-1.jpg", 3, 4);
+		UserDAO daoU = new UserDAO(this);
+		IngredientDAO ingrDAO = new IngredientDAO(this);
+		RecipeDAO daoRecipe = new RecipeDAO(this);
+        StepDAO daoStep = new StepDAO(this);
+		ingredients = ingrDAO.findAll();
+		users = daoU.findAll();
+		recipes = daoRecipe.findAll();
+		steps = daoStep.findAll();
+
+
+		for(int i = 0; i < steps.size(); i++) {
+            Log.d("AFFICHAGE STEP", steps.get(i).getStep_description());
+        }
 
 		recyclerView = findViewById(R.id.recyclerView);
 
-
-		recipes.add(r);
-		recipes.add(r1);
 		int displayMode = getResources().getConfiguration().orientation;
 
 		if (displayMode == 1) {
