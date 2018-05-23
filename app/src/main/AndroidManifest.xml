@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.NewRecipe" />
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.CreateLoginActivity" />
         <activity android:name=".Activities.PrintRecipe"></activity>
     </application>
 
