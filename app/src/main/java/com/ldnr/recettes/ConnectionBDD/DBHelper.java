@@ -1,7 +1,7 @@
 /**
- * @author: PREEL Pauline
+ * @author: GROUPE 3  : PREEL Pauline
  * @date: 22/05/2018
- * @brief: Application de recettes
+ * @brief: Projet : Application de livre de recettes
  *          Programme permettant de créer, consulter, mettre à jour et supprimer des recettes.
  *          Programme destiné aux élèves de la LDNR.
  *          Projet du Module Android / LDNR / Marc Abeille
@@ -103,7 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_HAVE = " CREATE TABLE " + TABLE_HAVE_NAME + " ( " +
             INGREDIENT_ID_INGREDIENT + " integer NOT NULL, " +
             RECIPE_ID_RECIPE + " integer NOT NULL, " +
-            UNITY_ID_UNITY + " integer NOT NULL, " +
+            UNITY_ID_UNITY + " integer, " +
             HAVE_INGR_COUNT + " integer NOT NULL, " +
             " CONSTRAINT Have_PK PRIMARY KEY (" + INGREDIENT_ID_INGREDIENT + "," + RECIPE_ID_RECIPE + "," + UNITY_ID_UNITY + ")," +
             " CONSTRAINT Have_Ingredient_FK FOREIGN KEY (" + INGREDIENT_ID_INGREDIENT + ") REFERENCES Ingredient(" + INGREDIENT_ID_INGREDIENT + ")," +
