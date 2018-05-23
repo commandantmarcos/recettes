@@ -6,9 +6,6 @@ import java.util.List;
 
 public interface IHaveDAO {
     public Have create(Have new_have);
-    public Have find(int id);
-    public Have find(String name);
-    public List<Have> findAll(String name);
     public List<Have> findAll(int id);
     public void update(Have new_have);
     public void delete(Have old_have);
