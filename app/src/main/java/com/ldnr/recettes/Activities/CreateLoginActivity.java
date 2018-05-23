@@ -42,24 +42,18 @@ import java.util.Objects;
             String userConfirmPassword = confirm_password.getText().toString();
 
             User user = new User();
-            boolean error = false;
-            String erreur = "f";
             ConfirmLoginForm newLogin = new ConfirmLoginForm();
-            user = newLogin.ConfirmNewLoginForm(login, email, password, confirm_password,erreur, error);
+            user = newLogin.ConfirmNewLoginForm(login, email, password, confirm_password);
 
-            if(error== true){
-
-               // Toast.makeText(this,erreur,Toast.LENGTH_LONG);
-
-                Log.d("erreur inscription", erreur) ;
-            }
-
-            else {
+            if(user.getPassword()== null){
+               Toast.makeText(this, "Erreur", Toast.LENGTH_LONG);
+               Log.d("PUTAIN DE MERDE !!!", "####################################################################################################");
+            } else {
                 //dao.insert(user);
-                //finish();
+                finish();
 
-                Intent createLoginIntent = new Intent(this, PrintRecipe.class);
-                startActivity(createLoginIntent);
+                //Intent createLoginIntent = new Intent(this, PrintRecipe.class);
+               // startActivity(createLoginIntent);
             }
         }
     }
