@@ -26,7 +26,7 @@ public class UserDAO extends DAO implements IUserDAO {
 
     private Cursor cursor;
     private ContentValues initialValues;
-    private String[] allColumns = { DBHelper.USER_ID_USER, DBHelper.USER_LOGIN, DBHelper.USER_EMAIL, DBHelper.USER_PASSWORD, DBHelper.RECIPE_ID_RECIPE };
+    private String[] allColumns = { dbHelper.USER_ID_USER, dbHelper.USER_LOGIN, dbHelper.USER_EMAIL, dbHelper.USER_PASSWORD, dbHelper.RECIPE_ID_RECIPE };
     private User user;
 
     /**
@@ -46,7 +46,7 @@ public class UserDAO extends DAO implements IUserDAO {
         setInitialValues(new_user);
 
         try {
-            if (database.insertOrThrow(DBHelper.TABLE_HAVE_NAME, null, initialValues) == -1) {
+            if (database.insertOrThrow(dbHelper.TABLE_HAVE_NAME, null, initialValues) == -1) {
                 user = null;
             } else {
                 user = new_user;
@@ -64,13 +64,13 @@ public class UserDAO extends DAO implements IUserDAO {
     @Override
     public User find(int id) {
         open();
-        cursor = database.rawQuery( "select * from " + DBHelper.TABLE_USER_NAME, null );
+        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME, null );
         // On positionne notre curseur en première position
         cursor.moveToFirst();
         // Tant qu’on est pas arrivé à la fin de nos enregistrements :
         if( cursor != null && cursor.moveToFirst() ) {
-            user = new User(cursor.getInt(cursor.getColumnIndex(DBHelper.USER_ID_USER)),(cursor.getString(cursor.getColumnIndex(DBHelper.USER_LOGIN))),
-                    cursor.getString(cursor.getColumnIndex(DBHelper.USER_EMAIL)), cursor.getString(cursor.getColumnIndex(DBHelper.USER_PASSWORD)));
+            user = new User(cursor.getInt(cursor.getColumnIndex(dbHelper.USER_ID_USER)),(cursor.getString(cursor.getColumnIndex(dbHelper.USER_LOGIN))),
+                    (cursor.getString(cursor.getColumnIndex(dbHelper.USER_EMAIL))), (cursor.getString(cursor.getColumnIndex(dbHelper.USER_PASSWORD)));
         }
         cursor.close();
 
@@ -111,13 +111,13 @@ public class UserDAO extends DAO implements IUserDAO {
 
     @Override
     public void update(User new_user) {
-        database.update(DBHelper.TABLE_USER_NAME, initialValues, " id_user = ? ", new String[]{Integer.toString(new_user.getId())});
+        database.update(dbHelper.TABLE_USER_NAME, initialValues, " id_user = ? ", new String[]{Integer.toString(new_user.getId())});
     }
 
     @Override
     public void delete(User old_user) {
         open();
-        database.delete(DBHelper.TABLE_USER_NAME, DBHelper.USER_ID_USER + " = ?", new String[]{String.valueOf(old_user.getId())});
+        database.delete(dbHelper.TABLE_USER_NAME, dbHelper.USER_ID_USER + " = ?", new String[]{String.valueOf(old_user.getId())});
         close();
     }
 
@@ -127,8 +127,8 @@ public class UserDAO extends DAO implements IUserDAO {
 
     public void setInitialValues(User user) {
         initialValues = new ContentValues();
-        initialValues.put(DBHelper.USER_LOGIN, user.getLogin());
-        initialValues.put(DBHelper.USER_EMAIL, user.getEmail());
-        initialValues.put(DBHelper.USER_PASSWORD, user.getPassword() );
+        initialValues.put(dbHelper.USER_LOGIN, user.getLogin());
+        initialValues.put(dbHelper.USER_EMAIL, user.getEmail());
+        initialValues.put(dbHelper.USER_PASSWORD, user.getPassword() );
     }
 }

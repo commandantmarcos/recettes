@@ -19,7 +19,7 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
 
     private Cursor cursor;
     private ContentValues initialValues;
-    private String[] allColumns = { DBHelper.RECIPE_ID_RECIPE, DBHelper.RECIPE_NAME_RECIPE, DBHelper.RECIPE_URL_PICTURE, DBHelper.RECIPE_TOTAL_TIME, DBHelper.RECIPE_TYPE_ID_TYPE, DBHelper.STEP_ID_STEP, DBHelper.RECIPE_SERVINGS_COUNT };
+    private String[] allColumns = { dbHelper.RECIPE_ID_RECIPE, dbHelper.RECIPE_NAME_RECIPE, dbHelper.RECIPE_URL_PICTURE, dbHelper.RECIPE_TOTAL_TIME, dbHelper.RECIPE_TYPE_ID_TYPE, dbHelper.STEP_ID_STEP, dbHelper.RECIPE_SERVINGS_COUNT };
     private Recipe recipe;
     private UserDAO daoUser;
 
@@ -103,13 +103,13 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
 
         setInitialValues(new_recipe);
 
-        database.update(DBHelper.TABLE_RECIPE_NAME, this.initialValues, DBHelper.RECIPE_ID_RECIPE + " = ?", new String[]{String.valueOf(new_recipe.getId_recipe())});
+        database.update(dbHelper.TABLE_RECIPE_NAME, this.initialValues, dbHelper.RECIPE_ID_RECIPE + " = ?", new String[]{String.valueOf(new_recipe.getId_recipe())});
     }
 
     @Override
     public void delete(Recipe old_recipe) {
         open();
-        database.delete(DBHelper.TABLE_RECIPE_NAME, DBHelper.RECIPE_ID_RECIPE + " = ?",
+        database.delete(dbHelper.TABLE_RECIPE_NAME, dbHelper.RECIPE_ID_RECIPE + " = ?",
                 new String[]{String.valueOf(old_recipe.getId_recipe())});
         close();
     }
@@ -120,16 +120,16 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
 
     public void setInitialValues(Recipe recipe) {
         this.initialValues = new ContentValues();
-        this.initialValues.put(DBHelper.RECIPE_ID_RECIPE, recipe.getId_recipe());
-        this.initialValues.put(DBHelper.RECIPE_NAME_RECIPE, recipe.getName());
-        this.initialValues.put(DBHelper.RECIPE_URL_PICTURE, recipe.getUrl_picture());
-        this.initialValues.put(DBHelper.RECIPE_TOTAL_TIME, recipe.getTotal_time() );
-        this.initialValues.put(DBHelper.RECIPE_TYPE_ID_TYPE, recipe.dish_type.getId_type());
+        this.initialValues.put(dbHelper.RECIPE_ID_RECIPE, recipe.getId_recipe());
+        this.initialValues.put(dbHelper.RECIPE_NAME_RECIPE, recipe.getName());
+        this.initialValues.put(dbHelper.RECIPE_URL_PICTURE, recipe.getUrl_picture());
+        this.initialValues.put(dbHelper.RECIPE_TOTAL_TIME, recipe.getTotal_time() );
+        this.initialValues.put(dbHelper.RECIPE_TYPE_ID_TYPE, recipe.dish_type.getId_type());
 
         for (Step step : List<Step> steps) {
-            this.initialValues.put(DBHelper.STEP_ID_STEP, recipe.steps.getId_step() );
+            this.initialValues.put(dbHelper.STEP_ID_STEP, recipe.steps.getId_step() );
         }
 
-        this.initialValues.put(DBHelper.RECIPE_SERVINGS_COUNT, recipe.getServings_count() );
+        this.initialValues.put(dbHelper.RECIPE_SERVINGS_COUNT, recipe.getServings_count() );
     }
 }

@@ -27,7 +27,7 @@ public class HaveDAO extends DAO implements IHaveDAO {
 
     private Cursor cursor;
     private ContentValues initialValues;
-    private String[] allColumns = { DBHelper.INGREDIENT_ID_INGREDIENT, DBHelper.RECIPE_ID_RECIPE, DBHelper.UNITY_ID_UNITY, DBHelper.HAVE_INGR_COUNT };
+    private String[] allColumns = { dbHelper.INGREDIENT_ID_INGREDIENT, dbHelper.RECIPE_ID_RECIPE, dbHelper.UNITY_ID_UNITY, dbHelper.HAVE_INGR_COUNT };
     private Have have = null;
 
     /**
@@ -44,7 +44,7 @@ public class HaveDAO extends DAO implements IHaveDAO {
         setInitialValues(new_have);
 
         try {
-            if (database.insertOrThrow(DBHelper.TABLE_HAVE_NAME, null, initialValues) == -1) {
+            if (database.insertOrThrow(dbHelper.TABLE_HAVE_NAME, null, initialValues) == -1) {
                 have = null;
             } else {
                 have = new_have;
@@ -59,15 +59,30 @@ public class HaveDAO extends DAO implements IHaveDAO {
     }
 
     @Override
+    public Have find(int id) {
+        return null;
+    }
+
+    @Override
+    public Have find(String name) {
+        return null;
+    }
+
+    @Override
+    public List<Have> findAll(String name) {
+        return null;
+    }
+
+    @Override
     public List<Have> findAll(int id_recipe) {
         List<Have> listHave = new ArrayList<>();
-        cursor = database.rawQuery("SELECT "+ allColumns + " FROM " + DBHelper.TABLE_HAVE_NAME + " WHERE " + DBHelper.RECIPE_ID_RECIPE + " LIKE " + id_recipe + " ; " , null );
+        cursor = database.rawQuery("SELECT "+ allColumns + " FROM " + dbHelper.TABLE_HAVE_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " LIKE " + id_recipe + " ; " , null );
         cursor.moveToFirst();
 
         if( cursor != null && cursor.moveToFirst() ){
             while(cursor.isAfterLast()) {
                 // TODO : accéder à ingrédient !!
-                //listHave.add(new Have((cursor.getClass(cursor.getColumnIndex(DBHelper.INGREDIENT_ID_INGREDIENT))), (cursor.getInt(cursor.getColumnIndex(DBHelper.RECIPE_ID_RECIPE))), (cursor.getInt(cursor.getColumnIndex(DBHelper.UNITY_ID_UNITY)))), (cursor.getInt(cursor.getColumnIndex(DBHelper.HAVE_INGR_COUNT)))) );
+                //listHave.add(new Have((cursor.getClass(cursor.getColumnIndex(dbHelper.INGREDIENT_ID_INGREDIENT))), (cursor.getInt(cursor.getColumnIndex(dbHelper.RECIPE_ID_RECIPE))), (cursor.getInt(cursor.getColumnIndex(dbHelper.UNITY_ID_UNITY)))), (cursor.getInt(cursor.getColumnIndex(dbHelper.HAVE_INGR_COUNT)))) );
                 cursor.moveToNext();
             }
             cursor.close();
@@ -77,14 +92,19 @@ public class HaveDAO extends DAO implements IHaveDAO {
     }
 
     @Override
+    public List<Have> findAll() {
+        return null;
+    }
+
+    @Override
     public void update(int id_recipe) {
-        database.update(DBHelper.TABLE_HAVE_NAME, initialValues, " id_recipe = ? ", new String[]{Integer.toString(id_recipe)});
+        database.update(dbHelper.TABLE_HAVE_NAME, initialValues, " id_recipe = ? ", new String[]{Integer.toString(id_recipe)});
     }
 
     @Override
     public void delete(int id_recipe) {
         open();
-        database.delete(DBHelper.TABLE_HAVE_NAME, DBHelper.RECIPE_ID_RECIPE + " = ?", new String[]{String.valueOf(id_recipe)});
+        database.delete(dbHelper.TABLE_HAVE_NAME, dbHelper.RECIPE_ID_RECIPE + " = ?", new String[]{String.valueOf(id_recipe)});
         close();
     }
 
@@ -94,12 +114,12 @@ public class HaveDAO extends DAO implements IHaveDAO {
 
     public void setInitialValues(Have new_have) {
         initialValues = new ContentValues();
-        initialValues.put(DBHelper.INGREDIENT_ID_INGREDIENT, new_have.getIngredient().getId_ingredient());
+        initialValues.put(dbHelper.INGREDIENT_ID_INGREDIENT, new_have.getIngredient().getId_ingredient());
 
         // TODO : Réussir à récupérer l'id-recipe !!
-        // contentValues.put(DBHelper.RECIPE_ID_RECIPE, new_have.getIngredient());
+        // contentValues.put(dbHelper.RECIPE_ID_RECIPE, new_have.getIngredient());
 
-        initialValues.put(DBHelper.UNITY_ID_UNITY, new_have.getUnity() );
-        initialValues.put(DBHelper.HAVE_INGR_COUNT, new_have.getNumber() );
+        initialValues.put(dbHelper.UNITY_ID_UNITY, new_have.getUnity() );
+        initialValues.put(dbHelper.HAVE_INGR_COUNT, new_have.getNumber() );
     }
 }
