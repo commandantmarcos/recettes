@@ -31,30 +31,57 @@ import java.util.Objects;
 
         public void onValidLoginClicked(View view) {
 
-            EditText login = findViewById( R.id.user_login );
-            EditText email = findViewById( R.id.user_mail );
-            EditText password = findViewById( R.id.user_password );
-            EditText confirm_password = findViewById( R.id.user_confirm_password );
+            EditText login = findViewById(R.id.user_login);
+            EditText email = findViewById(R.id.user_mail);
+            EditText password = findViewById(R.id.user_password);
+            EditText confirm_password = findViewById(R.id.user_confirm_password);
 
             String userLogin = login.getText().toString();
             String userEmail = email.getText().toString();
-            String userPassword = login.getText().toString();
+            String userPassword = password.getText().toString();
             String userConfirmPassword = confirm_password.getText().toString();
 
             User user = new User();
             ConfirmLoginForm newLogin = new ConfirmLoginForm();
-            user = newLogin.ConfirmNewLoginForm(login, email, password, confirm_password);
+            user = newLogin.ConfirmNewLoginForm(userLogin, userEmail, userPassword, userConfirmPassword);
 
-            if(user.getPassword()== null){
-               Toast.makeText(this, "Erreur", Toast.LENGTH_LONG);
-               Log.d("PUTAIN DE MERDE !!!", "####################################################################################################");
-            } else {
-                //dao.insert(user);
-                finish();
 
-                //Intent createLoginIntent = new Intent(this, PrintRecipe.class);
-               // startActivity(createLoginIntent);
+
+        }
+        public  void onErrorCatch(int i) {
+            EditText login = findViewById(R.id.user_login);
+            EditText email = findViewById(R.id.user_mail);
+            EditText password = findViewById(R.id.user_password);
+            EditText confirm_password = findViewById(R.id.user_confirm_password);
+
+            String userLogin = login.getText().toString();
+            String userEmail = email.getText().toString();
+            String userPassword = password.getText().toString();
+            String userConfirmPassword = confirm_password.getText().toString();
+
+            User user = new User();
+            ConfirmLoginForm newLogin = new ConfirmLoginForm();
+            user = newLogin.ConfirmNewLoginForm(userLogin, userEmail, userPassword, userConfirmPassword);
+
+
+            switch (i){
+                case ConfirmLoginForm.validPassword( userPassword, userConfirmPassword, user):
+                    Toast.makeText( this, res.getString(R.string.error_email), Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                     Toast.makeText( this, res.getString(R.string.error_login), Toast.LENGTH_LONG).show();
+                     break;
+                case 3:
+                    Toast.makeText(this, res.getString(R.string.error_password_short), Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    Toast.makeText( this, res.getString(R.string.error_password_wrong), Toast.LENGTH_LONG).show();
+                    break;
+                case 5:
+                    Toast.makeText( this, res.getString(R.string.empty_field), Toast.LENGTH_LONG).show();
+
             }
+
         }
     }
 

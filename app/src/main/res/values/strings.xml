@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Recettes</string>
+    <string name="error_email">Merci de saisir une adresse mail valide</string>
+    <string name="error_login">Merci de saisir une adresse mail valide</string>
+    <string name="error_password_short">Merci de saisir une adresse mail valide</string>
+    <string name="empty_field">Merci de saisir une adresse mail valide</string>
+    <string name="error_password_wrong">Merci de saisir une adresse mail valide</string>
 </resources>

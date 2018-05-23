@@ -1,6 +1,6 @@
 /**
- * @author: GROUPE 3  : PREEL Pauline
- * @date: 22/05/2018
+ * @author: GROUPE 3
+ * @date: Mai 2018
  * @brief: Projet : Application de livre de recettes
  *          Programme permettant de créer, consulter, mettre à jour et supprimer des recettes.
  *          Programme destiné aux élèves de la LDNR.
