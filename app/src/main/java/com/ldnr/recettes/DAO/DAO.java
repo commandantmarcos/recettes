@@ -1,3 +1,12 @@
+/**
+ * @author: GROUPE 3  : PREEL Pauline
+ * @date: 22/05/2018
+ * @brief: Projet : Application de livre de recettes
+ *          Programme permettant de créer, consulter, mettre à jour et supprimer des recettes.
+ *          Programme destiné aux élèves de la LDNR.
+ *          Projet du Module Android / LDNR / Marc Abeille
+ */
+
 package com.ldnr.recettes.DAO;
 
 import android.content.Context;
@@ -10,8 +19,8 @@ import java.util.List;
 
 public abstract class DAO {
 
-    private SQLiteDatabase database;
-    private DBHelper dbHelper;
+    protected static SQLiteDatabase database;
+    protected static DBHelper dbHelper;
 
     /**
      * Constructor
@@ -25,14 +34,14 @@ public abstract class DAO {
      * Method to open database
      * @throws SQLException
      */
-    public void open() throws SQLException {
+    public static void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
     }
 
     /**
      * Method to close database
      */
-    public void close() {
+    public static void close() {
         dbHelper.close();
     }
 
