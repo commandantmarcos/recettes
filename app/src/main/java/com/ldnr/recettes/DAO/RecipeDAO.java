@@ -7,6 +7,7 @@ import android.database.SQLException;
 
 import com.ldnr.recettes.Beans.Recipe;
 import com.ldnr.recettes.Beans.User;
+import com.ldnr.recettes.Beans.Step;
 import com.ldnr.recettes.ConnectionBDD.DBHelper;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
         }
 
         return recipe;
+
     }
 
     @Override
@@ -97,12 +99,19 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
 
     @Override
     public void update(Recipe new_recipe) {
+        open();
 
+        setInitialValues(new_recipe);
+
+        database.update(DBHelper.TABLE_RECIPE_NAME, this.initialValues, DBHelper.RECIPE_ID_RECIPE + " = ?", new String[]{String.valueOf(new_recipe.getId_recipe())});
     }
 
     @Override
     public void delete(Recipe old_recipe) {
-
+        open();
+        database.delete(DBHelper.TABLE_RECIPE_NAME, DBHelper.RECIPE_ID_RECIPE + " = ?",
+                new String[]{String.valueOf(old_recipe.getId_recipe())});
+        close();
     }
 
     public ContentValues getInitialValues() {
@@ -110,20 +119,17 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
     }
 
     public void setInitialValues(Recipe recipe) {
-
         this.initialValues = new ContentValues();
         this.initialValues.put(DBHelper.RECIPE_ID_RECIPE, recipe.getId_recipe());
         this.initialValues.put(DBHelper.RECIPE_NAME_RECIPE, recipe.getName());
         this.initialValues.put(DBHelper.RECIPE_URL_PICTURE, recipe.getUrl_picture());
         this.initialValues.put(DBHelper.RECIPE_TOTAL_TIME, recipe.getTotal_time() );
-
-/**
         this.initialValues.put(DBHelper.RECIPE_TYPE_ID_TYPE, recipe.dish_type.getId_type());
-        for (Step step : recipe.steps) {
-            this.initialValues.put(DBHelper.STEP_ID_STEP, steps.getId_step() );
-        }
- **/
-        this.initialValues.put(DBHelper.RECIPE_SERVINGS_COUNT, recipe.getServings_count() );
 
+        for (Step step : List<Step> steps) {
+            this.initialValues.put(DBHelper.STEP_ID_STEP, recipe.steps.getId_step() );
+        }
+
+        this.initialValues.put(DBHelper.RECIPE_SERVINGS_COUNT, recipe.getServings_count() );
     }
 }

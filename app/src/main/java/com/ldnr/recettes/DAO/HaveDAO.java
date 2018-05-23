@@ -1,6 +1,6 @@
 /**
- * @author: GROUPE 3  : PREEL Pauline
- * @date: 22/05/2018
+ * @author: GROUPE 3
+ * @date: Mai 2018
  * @brief: Projet : Application de livre de recettes
  *          Programme permettant de créer, consulter, mettre à jour et supprimer des recettes.
  *          Programme destiné aux élèves de la LDNR.
@@ -16,7 +16,6 @@ import android.database.SQLException;
 
 
 import com.ldnr.recettes.Beans.Have;
-import com.ldnr.recettes.Beans.Recipe;
 import com.ldnr.recettes.ConnectionBDD.DBHelper;
 
 import java.util.ArrayList;
@@ -73,17 +72,20 @@ public class HaveDAO extends DAO implements IHaveDAO {
             }
             cursor.close();
         }
+        close();
         return listHave;
     }
 
     @Override
-    public void update(int id) {
-        database.update(DBHelper.TABLE_HAVE_NAME, initialValues, " id_recipe = ? ", new String[]{Integer.toString(id)});
+    public void update(int id_recipe) {
+        database.update(DBHelper.TABLE_HAVE_NAME, initialValues, " id_recipe = ? ", new String[]{Integer.toString(id_recipe)});
     }
 
     @Override
-    public void delete(Have object) {
-
+    public void delete(int id_recipe) {
+        open();
+        database.delete(DBHelper.TABLE_HAVE_NAME, DBHelper.RECIPE_ID_RECIPE + " = ?", new String[]{String.valueOf(id_recipe)});
+        close();
     }
 
     public ContentValues getInitialValues() {
@@ -97,7 +99,7 @@ public class HaveDAO extends DAO implements IHaveDAO {
         // TODO : Réussir à récupérer l'id-recipe !!
         // contentValues.put(DBHelper.RECIPE_ID_RECIPE, new_have.getIngredient());
 
-        initialValues.put(DBHelper.UNITY_ID_UNITY, new_have.getUnity());
+        initialValues.put(DBHelper.UNITY_ID_UNITY, new_have.getUnity() );
         initialValues.put(DBHelper.HAVE_INGR_COUNT, new_have.getNumber() );
     }
 }
