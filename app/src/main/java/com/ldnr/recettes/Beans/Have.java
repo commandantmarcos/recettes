@@ -13,6 +13,10 @@ public class Have {
         this.unity = unity;
     }
 
+    public Have(Ingredient ingredient){
+        this.ingredient = ingredient;
+    }
+
     public Have() {
 
     }
