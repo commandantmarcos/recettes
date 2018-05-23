@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newRecipeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,24 +12,47 @@
         android:layout_height="wrap_content"
         android:hint="Nom de la recette"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Veuillez choisir vos ingrédients"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Veuillez choisir vos ingrédients" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Spinner android:id="@+id/bbox_ingredients"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/bbox_ingredients"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
 
-        <Spinner android:id="@+id/bbox_unity"
+        <Spinner
+            android:id="@+id/bbox_unity"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@id/bbox_unity"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Quantity"
+            android:visibility="visible"
+            tools:textSize="10sp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:text="Ajouter"
+        android:visibility="visible" />
 
 </LinearLayout>
