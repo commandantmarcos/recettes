@@ -10,6 +10,7 @@ public interface IIngredientDAO {
     public Ingredient find(String name);
     public List<Ingredient> findAll(String name);
     public List<Ingredient> findAll(int id);
+    public void findAll(List<Ingredient> lists);
     public void update(Ingredient new_ingredient);
     public void delete(Ingredient old_ingredient);
 }
