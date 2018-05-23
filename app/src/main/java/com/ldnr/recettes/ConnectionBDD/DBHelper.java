@@ -88,6 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
             RECIPE_TOTAL_TIME + " real NOT NULL, " +
             RECIPE_TYPE_ID_TYPE + " integer NOT NULL, " +
             STEP_ID_STEP + " integer NOT NULL, " +
+            RECIPE_SERVINGS_COUNT + " integer NOT NULL, " +
             " CONSTRAINT Recipe_Recipe_type_FK FOREIGN KEY (" + RECIPE_TYPE_ID_TYPE + ") REFERENCES Recipe_type(" + RECIPE_TYPE_ID_TYPE + "), " +
             " CONSTRAINT Recipe_Step0_FK FOREIGN KEY (" + STEP_ID_STEP + ") REFERENCES Step(" + STEP_ID_STEP + ") ) ";
 
@@ -96,7 +97,7 @@ public class DBHelper extends SQLiteOpenHelper {
             USER_LOGIN + " text NOT NULL, " +
             USER_EMAIL + " text NOT NULL, " +
             USER_PASSWORD + " text NOT NULL, " +
-            RECIPE_ID_RECIPE + " integer NOT NULL, " +
+            RECIPE_ID_RECIPE + " integer, " +
             " CONSTRAINT User_Recipe_FK FOREIGN KEY (" + RECIPE_ID_RECIPE + ") REFERENCES Recipe(" + RECIPE_ID_RECIPE + ") ) ";
 
     private static final String SQL_CREATE_HAVE = " CREATE TABLE " + TABLE_HAVE_NAME + " ( " +
