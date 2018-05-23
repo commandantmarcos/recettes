@@ -98,7 +98,7 @@ public class HaveDAO extends DAO implements IHaveDAO {
 
     @Override
     public void update(int id_recipe) {
-        database.update(dbHelper.TABLE_HAVE_NAME, initialValues, " id_recipe = ? ", new String[]{Integer.toString(id_recipe)});
+        database.update(DBHelper.TABLE_HAVE_NAME, initialValues, " id_recipe = ? ", new String[]{Integer.toString(id_recipe)});
     }
 
     @Override
