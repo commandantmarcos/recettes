@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.ldnr.recettes.Beans.Ingredient;
 import com.ldnr.recettes.Beans.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientDAO extends DAO implements IIngredientDAO {
@@ -44,7 +45,8 @@ public class IngredientDAO extends DAO implements IIngredientDAO {
     }
 
     @Override
-    public void findAll(List<Ingredient> lists) {
+    public List<Ingredient> findAll() {
+        List<Ingredient> lists = new ArrayList<>();
         Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_INGREDIENT_NAME, null );
         // On positionne notre curseur en première position
         res.moveToFirst();
@@ -58,6 +60,7 @@ public class IngredientDAO extends DAO implements IIngredientDAO {
             res.moveToNext();
         }
         res.close();
+        return lists;
     }
 
     @Override
