@@ -62,7 +62,7 @@ public class HaveDAO extends DAO implements IHaveDAO {
     @Override
     public List<Have> findAll(int id_recipe) {
         List<Have> listHave = new ArrayList<>();
-        cursor = database.rawQuery("SELECT "+ allColumns + " FROM " + DBHelper.TABLE_HAVE_NAME + " WHERE " + DBHelper.RECIPE_ID_RECIPE + " LIKE " + id + " ; " , null );
+        cursor = database.rawQuery("SELECT "+ allColumns + " FROM " + DBHelper.TABLE_HAVE_NAME + " WHERE " + DBHelper.RECIPE_ID_RECIPE + " LIKE " + id_recipe + " ; " , null );
         cursor.moveToFirst();
 
         if( cursor != null && cursor.moveToFirst() ){

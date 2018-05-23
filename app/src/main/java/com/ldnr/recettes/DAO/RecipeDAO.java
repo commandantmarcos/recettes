@@ -34,7 +34,7 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
         setInitialValues(new_recipe);
 
         try {
-            if (database.insertOrThrow(DBHelper.TABLE_HAVE_NAME, null, initialValues) == -1) {
+            if (database.insertOrThrow(dbHelper.TABLE_HAVE_NAME, null, initialValues) == -1) {
                 recipe = null;
             } else {
                 recipe = new_recipe;

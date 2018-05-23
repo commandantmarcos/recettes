@@ -1,6 +1,7 @@
 package com.ldnr.recettes.DAO;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 
 import com.ldnr.recettes.Beans.Recipe;
@@ -18,6 +19,15 @@ public class UserDAO extends DAO implements IUserDAO {
     private String[] allColumns = { DBHelper.USER_ID_USER, DBHelper.USER_LOGIN, DBHelper.USER_EMAIL, DBHelper.USER_PASSWORD, DBHelper.RECIPE_ID_RECIPE };
     private User user;
 
+    /**
+     * Constructor
+     *
+     * @param context
+     */
+    public UserDAO(Context context) {
+        super(context);
+    }
+
 
     @Override
     public User create(User new_user) {
@@ -28,7 +38,18 @@ public class UserDAO extends DAO implements IUserDAO {
 
     @Override
     public User find(int id) {
-        return null;
+        User user;
+        Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_USER_NAME, null );
+        // On positionne notre curseur en première position
+        res.moveToFirst();
+        // Tant qu’on est pas arrivé à la fin de nos enregistrements :
+
+            user = new User(res.getInt(res.getColumnIndex(dbHelper.USER_ID_USER)),(res.getString(res.getColumnIndex(dbHelper.USER_LOGIN))),
+                    res.getString(res.getColumnIndex(dbHelper.USER_EMAIL)), res.getString(res.getColumnIndex(dbHelper.USER_PASSWORD)));
+
+        res.close();
+
+        return user;
     }
 
     @Override
@@ -42,34 +63,25 @@ public class UserDAO extends DAO implements IUserDAO {
     }
 
     @Override
-    public List<User> findAll() {
-        List<Word> words = new ArrayList<>();
-
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + Word.TABLE_NAME + " ORDER BY " +
-                Word.COLUMN_TIMESTAMP + " DESC";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Word word = new Word();
-                word.setId(cursor.getInt(cursor.getColumnIndex(Word.COLUMN_ID)));
-                word.setWord(cursor.getString(cursor.getColumnIndex(Word.COLUMN_WORD)));
-                word.setTimestamp(cursor.getString(cursor.getColumnIndex(Word.COLUMN_TIMESTAMP)));
-
-                words.add(word);
-            } while (cursor.moveToNext());
-        }
-
-        // close db connection
-        db.close();
-
-        // return words list
-        return words;
+    public List<User> findAll(int id) {
         return null;
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>();
+         Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_USER_NAME, null );
+        // On positionne notre curseur en première position
+        res.moveToFirst();
+        // Tant qu’on est pas arrivé à la fin de nos enregistrements :
+        while(!res.isAfterLast()) {
+            users.add(new User(res.getInt(res.getColumnIndex(dbHelper.USER_ID_USER)),(res.getString(res.getColumnIndex(dbHelper.USER_LOGIN))),
+                    res.getString(res.getColumnIndex(dbHelper.USER_EMAIL)), res.getString(res.getColumnIndex(dbHelper.USER_PASSWORD))));
+
+            res.moveToNext();
+        }
+        res.close();
+        return users;
     }
 
     @Override

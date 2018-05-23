@@ -10,6 +10,7 @@ public interface IUserDAO {
     public User find(String name);
     public List<User> findAll(String name);
     public List<User> findAll(int id);
+    public List<User> findAll();
     public void update(User new_user);
     public void delete(User old_user);
 }

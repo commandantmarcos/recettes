@@ -10,6 +10,7 @@ public interface IStepDAO {
     public Step find(String name);
     public List<Step> findAll(String name);
     public List<Step> findAll(int id);
+    public List<Step> findAll();
     public void update(Step new_step);
     public void delete(Step old_step);
 }
