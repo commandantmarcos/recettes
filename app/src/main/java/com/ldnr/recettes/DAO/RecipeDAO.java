@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 
+import com.ldnr.recettes.Beans.Have;
 import com.ldnr.recettes.Beans.Recipe;
+import com.ldnr.recettes.Beans.Recipe_type;
 import com.ldnr.recettes.Beans.User;
 import com.ldnr.recettes.Beans.Step;
 import com.ldnr.recettes.ConnectionBDD.DBHelper;
@@ -22,10 +24,16 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
     private String[] allColumns = { dbHelper.RECIPE_ID_RECIPE, dbHelper.RECIPE_NAME_RECIPE, dbHelper.RECIPE_URL_PICTURE, dbHelper.RECIPE_TOTAL_TIME, dbHelper.RECIPE_TYPE_ID_TYPE, dbHelper.STEP_ID_STEP, dbHelper.RECIPE_SERVINGS_COUNT };
     private Recipe recipe;
     private UserDAO daoUser;
+    private StepDAO stepDAO;
+    private Recipe_typeDAO typeDAO;
+    private HaveDAO haveDAO;
 
     public RecipeDAO(Context context) {
         super(context);
         daoUser = new UserDAO(context);
+        stepDAO = new StepDAO(context);
+        typeDAO = new Recipe_typeDAO(context);
+        haveDAO = new HaveDAO(context);
     }
 
     @Override
@@ -74,20 +82,29 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
     @Override
     public List<Recipe> findAll() {
         List<Recipe> list = new ArrayList<>();
+        List<Have> listIngredient;
+        List<Step> steps;
+
         Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_RECIPE_NAME, null );
         // On positionne notre curseur en première position
         res.moveToFirst();
         // Tant qu’on est pas arrivé à la fin de nos enregistrements :
         while(!res.isAfterLast()) {
+
             int i = res.getInt(res.getColumnIndex(dbHelper.RECIPE_ID_RECIPE));
             String name = res.getString(res.getColumnIndex(dbHelper.RECIPE_NAME_RECIPE));
             String url = res.getString(res.getColumnIndex(dbHelper.RECIPE_URL_PICTURE));
             float time = res.getFloat(res.getColumnIndex(dbHelper.RECIPE_TOTAL_TIME));
             int serbing = res.getInt(res.getColumnIndex(dbHelper.RECIPE_SERVINGS_COUNT));
             User user = daoUser.find(i);
+            Recipe_type dish_type = typeDAO.find(i);
+            //Recipe_type dish_type = new Recipe_type();
+            listIngredient = haveDAO.findAll(i);
+
+            steps = stepDAO.findAll(i);
 
 
-            list.add(new Recipe(i, name, url, time, serbing, user));
+            list.add(new Recipe(i, name, url, time, serbing, user, dish_type, listIngredient, steps));
             //lists.add(new Ingredient(res.getInt(res.getColumnIndex(dbHelper.INGREDIENT_ID_INGREDIENT))), res.getString(res.getColumnIndex(dbHelper.INGREDIENT_NAME)));
 
             res.moveToNext();
