@@ -70,7 +70,7 @@ public class UserDAO extends DAO implements IUserDAO {
         // Tant qu’on est pas arrivé à la fin de nos enregistrements :
         if( cursor != null && cursor.moveToFirst() ) {
             user = new User(cursor.getInt(cursor.getColumnIndex(dbHelper.USER_ID_USER)),(cursor.getString(cursor.getColumnIndex(dbHelper.USER_LOGIN))),
-                    (cursor.getString(cursor.getColumnIndex(dbHelper.USER_EMAIL))), (cursor.getString(cursor.getColumnIndex(dbHelper.USER_PASSWORD)));
+                    (cursor.getString(cursor.getColumnIndex(dbHelper.USER_EMAIL))), (cursor.getString(cursor.getColumnIndex(dbHelper.USER_PASSWORD))) );
         }
         cursor.close();
 
