@@ -15,48 +15,48 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    protected static final String DATABASE_NAME = "DB_CookingMania.db";
+    public static final String DATABASE_NAME = "DB_CookingMania.db";
 
     // TABLE UNITY
-    protected static final String TABLE_UNITY_NAME = "Unity";
-    protected static final String UNITY_ID_UNITY = "id_unity";
-    protected static final String UNITY_UNITY_TYPE = "unity_type";
+    public static final String TABLE_UNITY_NAME = "Unity";
+    public static final String UNITY_ID_UNITY = "id_unity";
+    public static final String UNITY_UNITY_TYPE = "unity_type";
 
     // TABLE RECIPE_TYPE
-    protected static final String TABLE_RECIPE_TYPE_NAME = "Recipe_type";
-    protected static final String RECIPE_TYPE_ID_TYPE = "id_type";
-    protected static final String RECIPE_TYPE_TYPE_NAME = "type_name";
+    public static final String TABLE_RECIPE_TYPE_NAME = "Recipe_type";
+    public static final String RECIPE_TYPE_ID_TYPE = "id_type";
+    public static final String RECIPE_TYPE_TYPE_NAME = "type_name";
 
     // TABLE INGREDIENT
-    protected static final String TABLE_INGREDIENT_NAME = "Ingredient";
-    protected static final String INGREDIENT_ID_INGREDIENT = "id_ingredient";
-    protected static final String INGREDIENT_NAME = "name";
+    public static final String TABLE_INGREDIENT_NAME = "Ingredient";
+    public static final String INGREDIENT_ID_INGREDIENT = "id_ingredient";
+    public static final String INGREDIENT_NAME = "name";
 
     // TABLE STEP
-    protected static final String TABLE_STEP_NAME = "Step";
-    protected static final String STEP_ID_STEP = "id_step";
-    protected static final String STEP_STEP_NUM = "step_num";
-    protected static final String STEP_URL_STEP = "url_step";
-    protected static final String STEP_STEP_DESCRIBE = "step_describe";
+    public static final String TABLE_STEP_NAME = "Step";
+    public static final String STEP_ID_STEP = "id_step";
+    public static final String STEP_STEP_NUM = "step_num";
+    public static final String STEP_URL_STEP = "url_step";
+    public static final String STEP_STEP_DESCRIBE = "step_describe";
 
     // TABLE RECIPE
-    protected static final String TABLE_RECIPE_NAME = "Recipe";
-    protected static final String RECIPE_ID_RECIPE = "id_recipe";
-    protected static final String RECIPE_NAME_RECIPE = "name_recipe";
-    protected static final String RECIPE_URL_PICTURE = "url_picture";
-    protected static final String RECIPE_TOTAL_TIME = "total_time";
-    protected static final String RECIPE_SERVINGS_COUNT = "servings_count";
+    public static final String TABLE_RECIPE_NAME = "Recipe";
+    public static final String RECIPE_ID_RECIPE = "id_recipe";
+    public static final String RECIPE_NAME_RECIPE = "name_recipe";
+    public static final String RECIPE_URL_PICTURE = "url_picture";
+    public static final String RECIPE_TOTAL_TIME = "total_time";
+    public static final String RECIPE_SERVINGS_COUNT = "servings_count";
 
     // TABLE USER
-    protected static final String TABLE_USER_NAME = "User";
-    protected static final String USER_ID_USER = "id_user";
-    protected static final String USER_LOGIN = "login";
-    protected static final String USER_EMAIL = "email";
-    protected static final String USER_PASSWORD = "password";
+    public static final String TABLE_USER_NAME = "User";
+    public static final String USER_ID_USER = "id_user";
+    public static final String USER_LOGIN = "login";
+    public static final String USER_EMAIL = "email";
+    public static final String USER_PASSWORD = "password";
 
     // TABLE HAVE
-    protected static final String TABLE_HAVE_NAME = "Have";
-    protected static final String HAVE_INGR_COUNT = "ingr_count";
+    public static final String TABLE_HAVE_NAME = "Have";
+    public static final String HAVE_INGR_COUNT = "ingr_count";
 
     /****************************
      ****** SQLite QUERIES ******
