@@ -124,11 +124,12 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
         this.initialValues.put(dbHelper.RECIPE_NAME_RECIPE, recipe.getName());
         this.initialValues.put(dbHelper.RECIPE_URL_PICTURE, recipe.getUrl_picture());
         this.initialValues.put(dbHelper.RECIPE_TOTAL_TIME, recipe.getTotal_time() );
-        this.initialValues.put(dbHelper.RECIPE_TYPE_ID_TYPE, recipe.dish_type.getId_type());
+        // TODO :
+        /**this.initialValues.put(dbHelper.RECIPE_TYPE_ID_TYPE, recipe.dish_type.getId_type());
 
         for (Step step : List<Step> steps) {
             this.initialValues.put(dbHelper.STEP_ID_STEP, recipe.steps.getId_step() );
-        }
+        }**/
 
         this.initialValues.put(dbHelper.RECIPE_SERVINGS_COUNT, recipe.getServings_count() );
     }
