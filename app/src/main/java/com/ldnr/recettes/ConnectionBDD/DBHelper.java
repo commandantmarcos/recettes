@@ -9,9 +9,13 @@
 
 package com.ldnr.recettes.ConnectionBDD;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -124,7 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param context Contexte de l'application
      */
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 20);
     }
 
     /**
@@ -133,6 +137,9 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
+
         db.execSQL(SQL_CREATE_UNITY);
         db.execSQL(SQL_CREATE_RECIPE_TYPE);
         db.execSQL(SQL_CREATE_INGREDIENT);
@@ -140,6 +147,15 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_RECIPE);
         db.execSQL(SQL_CREATE_USER);
         db.execSQL(SQL_CREATE_HAVE);
+
+        createRecipe(db);
+        createUnity(db);
+        createType(db);
+        setSqlCreateIngredient(db);
+        createStep(db);
+        createHave(db);
+        gameTestUser(db);
+
     }
 
     /**
@@ -158,5 +174,159 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DROP_USER);
         db.execSQL(SQL_DROP_HAVE);
         onCreate(db);
+    }
+
+    public void gameTestUser(SQLiteDatabase db){
+
+        ContentValues value = new ContentValues();
+        List<String> name = new ArrayList<>();
+        List<String> email = new ArrayList<>();
+        List<String> password = new ArrayList<>();
+
+        name.add("Clémentine");
+        name.add("Edgard");
+        name.add("Sauron");
+        value.put(RECIPE_ID_RECIPE, 2);
+
+        email.add("clementine@mail.com");
+        email.add("edgard@mail.com");
+        email.add("sauron@mail.com");
+
+        password.add("1234512345");
+        password.add("2345623456");
+        password.add("3456734567");
+
+        for(int i = 0; i < name.size(); i++){
+            value.put(USER_LOGIN, name.get(i));
+            value.put(USER_EMAIL, email.get(i));
+            value.put(USER_PASSWORD, password.get(i));
+            db.insert(TABLE_USER_NAME, null, value);
+        }
+    }
+
+    public void createUnity(SQLiteDatabase db){
+        ContentValues value = new ContentValues();
+
+        List<String> unity = new ArrayList<>();
+
+        unity.add("ml");
+        unity.add("cl");
+        unity.add("dl");
+        unity.add("l");
+        unity.add("mg");
+        unity.add("g");
+        unity.add("cac");
+        unity.add("cas");
+
+        for(int i = 0; i < unity.size(); i++){
+            value.put(UNITY_UNITY_TYPE, unity.get(i));
+            db.insert(TABLE_UNITY_NAME, null, value);
+        }
+    }
+
+    public void createType(SQLiteDatabase db){
+        ContentValues value = new ContentValues();
+
+        value.put(RECIPE_TYPE_TYPE_NAME, "Entrée");
+        value.put(RECIPE_TYPE_TYPE_NAME, "Plat");
+        value.put(RECIPE_TYPE_TYPE_NAME, "Dessert");
+
+        db.insert(TABLE_RECIPE_TYPE_NAME, null, value);
+    }
+
+    public void setSqlCreateIngredient(SQLiteDatabase db){
+        ContentValues value = new ContentValues();
+        List<String> name = new ArrayList<>();
+
+        name.add("Pain");
+        name.add("Carotte");
+        name.add("Pomme de terre");
+        name.add("Celeri");
+        name.add("Sucre");
+        name.add("Farine");
+        name.add("Sel");
+        name.add("Oeuf");
+        name.add("Beurre");
+        name.add("Huile");
+        name.add("Chocolat");
+
+        for(int i = 0; i < name.size(); i++){
+            value.put(INGREDIENT_NAME, name.get(i));
+            db.insert(TABLE_INGREDIENT_NAME, null, value);
+        }
+    }
+
+    public void createStep(SQLiteDatabase db){
+        ContentValues value = new ContentValues();
+        List<String> name = new ArrayList<>();
+        List<String> url = new ArrayList<>();
+        List<String> description = new ArrayList<>();
+
+        name.add("1");
+        url.add("https://image.afcdn.com/recipe/20131023/45431_w600.jpg");
+        description.add("Couper votre pain en tranche");
+
+        name.add("2");
+        url.add("http://www.regal.fr/sites/art-de-vivre/files/styles/large/public/r30_tartine-beurre_fo.jpg?itok=LdDAuwla");
+        description.add("Etaler le beurre sur votre tranche");
+
+        name.add("1");
+        url.add("https://image.afcdn.com/recipe/20131023/45431_w600.jpg");
+        description.add("Couper votre pain en tranche");
+
+        name.add("2");
+        url.add("https://img2.topsante.com/var/topsante/storage/images/nutrition-et-recettes/equilibre-alimentaire/conseils-dietetiques/nutrition-une-pate-a-tartiner-maison-allegee-10783/88298-2-fre-FR/Nutrition-une-pate-a-tartiner-maison-allegee_width1024.jpg");
+        description.add("Etaler votre chocolat bio fait maison sur votre tranche de pain bio et fait maison");
+
+        for(int i = 0; i < name.size(); i++){
+            value.put(STEP_STEP_NUM, name.get(i));
+            value.put(STEP_URL_STEP, url.get(i));
+            value.put(STEP_STEP_DESCRIBE, description.get(i));
+            db.insert(TABLE_STEP_NAME, null, value);
+        }
+    }
+
+    public void createHave(SQLiteDatabase db){
+
+        ContentValues value = new ContentValues();
+
+        value.put(INGREDIENT_ID_INGREDIENT, 1);
+        value.put(RECIPE_ID_RECIPE, 1);
+        value.put(HAVE_INGR_COUNT, 1);
+
+        db.insert(TABLE_HAVE_NAME, null, value);
+
+        value.put(INGREDIENT_ID_INGREDIENT, 9);
+        value.put(RECIPE_ID_RECIPE, 1);
+        value.put(HAVE_INGR_COUNT, 1);
+
+        db.insert(TABLE_HAVE_NAME, null, value);
+
+    }
+
+    public void createRecipe(SQLiteDatabase db){
+
+        ContentValues value = new ContentValues();
+
+        value.put(RECIPE_NAME_RECIPE, "Tartine de beurre");
+        value.put(RECIPE_URL_PICTURE, "http://www.regal.fr/sites/art-de-vivre/files/styles/large/public/r30_tartine-beurre_fo.jpg?itok=LdDAuwla");
+        value.put(RECIPE_TOTAL_TIME, 3.5);
+        value.put(RECIPE_SERVINGS_COUNT, 4);
+        value.put(RECIPE_TYPE_ID_TYPE, 3);
+        value.put(STEP_ID_STEP, 1);
+        value.put(STEP_ID_STEP, 2);
+
+        db.insert(TABLE_RECIPE_NAME, null, value);
+
+        value.put(RECIPE_NAME_RECIPE, "Tartine de chocolat");
+        value.put(RECIPE_URL_PICTURE, "http://www.regal.fr/sites/art-de-vivre/files/styles/large/public/r30_tartine-beurre_fo.jpg?itok=LdDAuwla");
+        value.put(RECIPE_TOTAL_TIME, 3.5);
+        value.put(RECIPE_SERVINGS_COUNT, 2);
+        value.put(RECIPE_TYPE_ID_TYPE, 3);
+        value.put(STEP_ID_STEP, 3);
+        value.put(STEP_ID_STEP, 4);
+
+        db.insert(TABLE_RECIPE_NAME, null, value);
+
     }
 }
