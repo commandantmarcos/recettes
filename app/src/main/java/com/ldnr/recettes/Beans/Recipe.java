@@ -10,19 +10,19 @@ public class Recipe {
     private String url_picture;
     private float total_time;
     private int servings_count;
-    /*private User user;
-    private Recipe_type dish_type;
+    private User user;
+   /* private Recipe_type dish_type;
     private List<Have> listIngredient;
     private List<Step> steps;*/
 
-    public Recipe(int id_recipe, String name_recipe, String url_picture, float total_time, int servings_count/*, User user, Recipe_type dish_type, List<Have> listIngredient, List<Step> steps*/) {
+    public Recipe(int id_recipe, String name_recipe, String url_picture, float total_time, int servings_count, User user/*, Recipe_type dish_type, List<Have> listIngredient, List<Step> steps*/) {
         this.id_recipe = id_recipe;
         this.name_recipe = name_recipe;
         this.url_picture = url_picture;
         this.total_time = total_time;
         this.servings_count = servings_count;
-        /*this.user = user;
-        this.dish_type = dish_type;
+        this.user = user;
+        /*this.dish_type = dish_type;
         this.listIngredient = new ArrayList<Have>();
         this.steps = new ArrayList<Step>();*/
     }
@@ -51,11 +51,11 @@ public class Recipe {
         this.servings_count = servings_count;
     }
 
-   /* public void setUser(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public void setDish_type(Recipe_type dish_type) {
+    /*public void setDish_type(Recipe_type dish_type) {
         this.dish_type = dish_type;
     }
 
@@ -87,11 +87,11 @@ public class Recipe {
         return servings_count;
     }
 
-   /* public User getUser() {
+    public User getUser() {
         return user;
     }
 
-    public Recipe_type getDish_type() {
+    /*public Recipe_type getDish_type() {
         return dish_type;
     }
 
