@@ -24,6 +24,8 @@ public interface IStepDAO {
     public List<Step> findAll(String name);
     public List<Step> findAll(int id);
     public List<Step> findAll();
+
+    // UPDATE
     public void update(Step new_step);
 
     // DELETE

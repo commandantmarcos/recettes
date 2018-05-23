@@ -23,6 +23,8 @@ public interface IUserDAO {
     public List<User> findAll(String name);
     public List<User> findAll(int id);
     public List<User> findAll();
+
+    // UPDATE
     public void update(User new_user);
 
     // DELETE
