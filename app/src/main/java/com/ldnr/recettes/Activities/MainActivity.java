@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.ldnr.recettes.Beans.Ingredient;
 import com.ldnr.recettes.Beans.Recipe;
+import com.ldnr.recettes.Beans.Recipe_type;
 import com.ldnr.recettes.Beans.Step;
 import com.ldnr.recettes.Beans.User;
 import com.ldnr.recettes.DAO.IngredientDAO;
@@ -33,28 +34,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 	private RecyclerView recyclerView;
 	private List<Recipe> recipes = new ArrayList<>();
-	private List<User> users = new ArrayList<>();
-	private List<Ingredient> ingredients = new ArrayList<>();
-	private List<Step> steps = new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_main);
-		UserDAO daoU = new UserDAO(this);
-		IngredientDAO ingrDAO = new IngredientDAO(this);
+
 		RecipeDAO daoRecipe = new RecipeDAO(this);
-        StepDAO daoStep = new StepDAO(this);
-		ingredients = ingrDAO.findAll();
-		users = daoU.findAll();
 		recipes = daoRecipe.findAll();
-		steps = daoStep.findAll();
-
-
-		for(int i = 0; i < steps.size(); i++) {
-            Log.d("AFFICHAGE STEP", steps.get(i).getStep_description());
-        }
 
 		recyclerView = findViewById(R.id.recyclerView);
 
@@ -91,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 						intent.putExtra("id", Integer.toString(r.getId_recipe()));
 						intent.putExtra("name", r.getName());
 						intent.putExtra("url", r.getUrl_picture());
+
 
 						startActivity(intent);
 					}
