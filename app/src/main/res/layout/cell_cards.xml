@@ -25,7 +25,8 @@
                 <TextView android:id="@+id/recipe_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nom de recette" />
+                    android:text="Nom de recette"
+                    android:paddingRight="30dp"/>
 
                 <TextView android:id="@+id/servings_count"
                     android:layout_width="wrap_content"
@@ -33,6 +34,24 @@
                     android:text="affichage "/>
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update"
+        android:onClick="clickedOnUpdate" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:onClick="clickedOnDelete"/>
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

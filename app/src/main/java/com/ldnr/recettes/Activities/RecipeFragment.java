@@ -11,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ldnr.recettes.Beans.Recipe;
+import com.ldnr.recettes.Beans.User;
 import com.ldnr.recettes.DAO.RecipeDAO;
+import com.ldnr.recettes.DAO.UserDAO;
 import com.ldnr.recettes.R;
 import com.squareup.picasso.Picasso;
 
@@ -55,26 +57,31 @@ public class RecipeFragment extends Fragment {
             // TODO : gestion exception
         }
 
-        //Get recipe from database
+        // Get datas from database
         RecipeDAO daoRecipe = new RecipeDAO(this.getContext());
         recipe = daoRecipe.find(id_recipe);
+        User user;
+        UserDAO daoUser = new UserDAO(this.getContext());
+        user = daoUser.find(id_recipe);
+
+        String url = recipe.getUrl_picture();
 
         // Set the recipe's picture on ImageView
-        Picasso.with(imageView_picture.getContext()).load(recipe.getUrl_picture()).centerCrop().fit().into(imageView_picture);
+        Picasso.with(imageView_picture.getContext()).load(url).centerCrop().fit().into(imageView_picture);
 
         // Set the recipe's name on TextView
         textView_title.setText(recipe.getName());
 
         // Set the recipe's details on TextView
         StringBuilder buffer = new StringBuilder();
-        buffer.append("Recette ");
-        buffer.append(recipe.getDish_type().getType_name());
-        buffer.append("\n");
+        //buffer.append("Recette ");
+        //buffer.append(recipe.getDish_type().getType_name());
+        //buffer.append("\n");
         buffer.append("Pour ");
         buffer.append(Integer.toString(recipe.getServings_count()));
         buffer.append(" personnes\n");
         buffer.append("Postée par : ");
-        buffer.append(recipe.getUser().getLogin());
+//        buffer.append(user.getLogin());
         textView_description.setText(buffer);
 
         Log.e(getClass().getSimpleName(), "onCreateView called for recipe number " + id_recipe);
