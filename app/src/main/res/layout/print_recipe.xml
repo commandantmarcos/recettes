@@ -45,13 +45,13 @@
         android:textStyle="bold" />
 
     <ListView
-        android:id="@+id/p_recipe_step_list"
+        android:id="@+id/p_recipe_ing_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/p_recipe_ing_list"
+        android:id="@+id/p_recipe_step_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
