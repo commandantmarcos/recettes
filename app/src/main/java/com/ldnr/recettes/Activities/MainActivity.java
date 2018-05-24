@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import com.ldnr.recettes.Activities.Update;
 
 import com.ldnr.recettes.Beans.Ingredient;
 import com.ldnr.recettes.Beans.Recipe;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 	private RecyclerView recyclerView;
 	private List<Recipe> recipes = new ArrayList<>();
 	private RecipeDAO daoRecipe;
+	private int mposition;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,22 +66,25 @@ public class MainActivity extends AppCompatActivity {
 		//puis créer un MyAdapter, lui fournir notre liste de villes.
 		//cet adapter servira à remplir notre recyclerview
 		recyclerView.setAdapter(new Adapter(recipes));
-		//configureOnClickRecyclerView();
+		configureOnClickRecyclerView();
 		configureOnClickLongRecyclerView();
+		OnClickLongRecyclerView();
+
 
 	}
 
 	// 1 - Configure item click on RecyclerView
 	private void configureOnClickRecyclerView() {
+		Log.e("allez on y croit","kjqdhgjhhdghhjifh///////////////////////////");
 		ItemClickSupport.addTo(recyclerView, R.layout.cell_cards)
 				.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
 					@Override
 					public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+						Log.e("ça plane pour moi","k///////////////drgh///////////");
 						/*	Catch item position	*/
 						Adapter a = new Adapter(recipes);
 						Recipe r = a.getPosition(position);
 						Intent intent = new Intent(recyclerView.getContext(), PrintRecipe.class);
-
 						/*	Send recipe to next Activity	*/
 						intent.putExtra("id", Integer.toString(r.getId_recipe()));
 						intent.putExtra("name", r.getName());
@@ -119,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 						Adapter a = new Adapter(recipes);
 						Recipe r = a.getPosition(position);
 						 RecipeDAO recipeDAO = new RecipeDAO(recyclerView.getContext());
-						 recipeDAO.delete(5);
+						 //recipeDAO.delete();
 					}
 				});
 	}
@@ -132,46 +137,61 @@ public class MainActivity extends AppCompatActivity {
 
 					@Override
 					public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
+
+						Adapter a = new Adapter(recipes);
+						Recipe r = a.getPosition(position);
+						mposition = r.getId_recipe();
 						showAlertDialog(recyclerView);
 						Log.d("JE SUIS DANS LONGCLICK", "#################################################################################");
 						return false;
-
 					}
 				});
 	}
 
 
 
-		public void showAlertDialogButtonClicked() {
+	public void showAlertDialogButtonClicked() {
 
-			// setup the alert builder
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Suppression");
-			builder.setMessage("Souhaitez vous vraiment supprimer");
-			// add the buttons
-			builder.setPositiveButton("oui", null);
-			builder.setNegativeButton("non", null);
+		// setup the alert builder
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Suppression");
+		builder.setMessage("Souhaitez vous vraiment supprimer");
+		// add the buttons
+		builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(recyclerView.getContext(), MainActivity.class);
+				daoRecipe.delete(mposition);
+				startActivity(intent);
+			}
+		});
+		builder.setNegativeButton("non", null);
 
-			// create and show the alert dialog
-			AlertDialog dialog = builder.create();
+		// create and show the alert dialog
+		AlertDialog dialog = builder.create();
 
-			dialog.show();
-			deleteOnClickRecyclerView();
 
-		}
+		dialog.show();
+
+		//deleteOnClickRecyclerView();
+
+	}
 
 	public void onConnectClicked(View view) {
 		Intent loginIntent = new Intent(this, LoginActivity.class);
 		startActivity(loginIntent);
 
-
 	}
 	public void onCreateLoginClicked(View view) {
-		//Intent createLoginIntent = new Intent(this, CreateLoginActivity.class);
-		//startActivity(createLoginIntent);
+		Intent createLoginIntent = new Intent(this, CreateLoginActivity.class);
+		startActivity(createLoginIntent);
 
 	}
-
+	public void showUpdate() {
+		Intent intent = new Intent(this, Update.class);
+		intent.putExtra("id", mposition);
+		startActivity(intent);
+	}
 
 	public void showAlertDialog(View view) {
 
@@ -185,25 +205,19 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Recipe recipe = new Recipe();
-				RecipeDAO recipeDao = new RecipeDAO(view.getContext());
+				//RecipeDAO recipeDao = new RecipeDAO(this);
 				switch (which) {
 					case 0: // updade
+						showUpdate();
 
-						//OnClickLongRecyclerView();
-						configureOnClickRecyclerView();
-					break;
+						Log.e("re al con ", "ftyzigyf//////rhz**********tyje----------");
+						break;
 					case 1: // delete
+							showAlertDialogButtonClicked();
 
-						showAlertDialogButtonClicked();
-						alacon();
-
-						Log.d("retest delete ","*****************////////////////////////***************");
-                  //daoRecipe.delete(r.getId_recipe());
-
-					break;
+						daoRecipe.delete(mposition);
+						break;
 					case 2: // cancel
-						Log.d("j'ai choisi cancel", "rienrienrienrien");
-
 						break;
 
 				}
@@ -214,10 +228,5 @@ public class MainActivity extends AppCompatActivity {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
-
-	public void alacon(){
-		Log.d("je suis un log a la con" , "********************       ***********");
-	}
-
 
 }
