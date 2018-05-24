@@ -128,7 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param context Contexte de l'application
      */
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 28);
+        super(context, DATABASE_NAME, null, 34);
     }
 
     /**
@@ -139,7 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
 
-
+        db.execSQL("PRAGMA foreign_keys=ON;");
         db.execSQL(SQL_CREATE_UNITY);
         db.execSQL(SQL_CREATE_RECIPE_TYPE);
         db.execSQL(SQL_CREATE_INGREDIENT);
@@ -186,7 +186,6 @@ public class DBHelper extends SQLiteOpenHelper {
         name.add("Clémentine");
         name.add("Edgard");
         name.add("Sauron");
-        value.put(RECIPE_ID_RECIPE, 2);
 
         email.add("clementine@mail.com");
         email.add("edgard@mail.com");
@@ -200,6 +199,8 @@ public class DBHelper extends SQLiteOpenHelper {
             value.put(USER_LOGIN, name.get(i));
             value.put(USER_EMAIL, email.get(i));
             value.put(USER_PASSWORD, password.get(i));
+            if(i  == 1 || i == 2)
+                value.put(RECIPE_ID_RECIPE, i);
             db.insert(TABLE_USER_NAME, null, value);
         }
     }
