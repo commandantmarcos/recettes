@@ -6,15 +6,17 @@ public class Step {
     private int step_num;
     private String url_step;
     private String step_description;
+    private int id_recipe;
 
     public Step() {
     }
 
-    public Step(int id_step, int step_num, String url_step, String step_description) {
+    public Step(int id_step, int step_num, String url_step, String step_description, int id_recipe) {
         this.id_step = id_step;
         this.step_num = step_num;
         this.url_step = url_step;
         this.step_description = step_description;
+        this.id_recipe = id_recipe;
     }
 
     public int getId_step() {
@@ -47,5 +49,13 @@ public class Step {
 
     public void setStep_description(String step_description) {
         this.step_description = step_description;
+    }
+
+    public int getId_recipe() {
+        return id_recipe;
+    }
+
+    public void setId_recipe(int id_recipe) {
+        this.id_recipe = id_recipe;
     }
 }
