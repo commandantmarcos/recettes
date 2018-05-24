@@ -23,7 +23,7 @@ public class AdapterPrint extends RecyclerView.Adapter<ViewHoldersPrint>{
     //et par la même indiquer la vue à inflater (à partir des layout xml)
     @Override
     public ViewHoldersPrint onCreateViewHolder(ViewGroup viewGroup, int itemType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_cards,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_step,viewGroup,false);
         return new ViewHoldersPrint(view);
     }
 
