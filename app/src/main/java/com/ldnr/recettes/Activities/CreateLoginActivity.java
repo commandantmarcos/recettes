@@ -8,19 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ldnr.recettes.Beans.User;
+import com.ldnr.recettes.DAO.UserDAO;
 import com.ldnr.recettes.R;
 import com.ldnr.recettes.TestForm.ConfirmLoginForm;
 
-import java.util.Objects;
 
     public class CreateLoginActivity extends AppCompatActivity {
 
-        private String localLogin;
-        private String localPassword;
-        private String localEmail;
         private Resources res;
         TextView error_login;
         TextView error_mail;
@@ -73,10 +69,8 @@ import java.util.Objects;
             empty_field.setText("");
 
             ConfirmLoginForm newLogin = new ConfirmLoginForm();
-//            b = newLogin.ConfirmNewLoginForm(login, email, password, confirm_password);
             newLogin.ConfirmNewLoginForm(login, email, password, confirm_password);
 
-            //blablablalbaalbalbalabla
             switch (b) {
                 case 1:
                     error_login.setText("Le login doit avoir au moins 3 caractères");
@@ -102,6 +96,9 @@ import java.util.Objects;
                     Log.d("tag","?????????????????????????????????");
                     user = new User(login.getText().toString(), email.getText().toString(),
                                password.getText().toString());
+                   // UserDAO.create(user);
+                    Intent homeIntent = new Intent(this, MainActivity.class);
+                    startActivity(homeIntent);
             }
         }
     }
