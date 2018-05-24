@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.util.Log;
 
 import com.ldnr.recettes.Beans.Have;
 import com.ldnr.recettes.Beans.Recipe;
@@ -61,7 +62,36 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
 
     @Override
     public Recipe find(int id) {
-        return null;
+        Recipe recipe;
+        List<Have> listIngredient;
+        List<Step> steps;
+
+        Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_RECIPE_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
+        // On positionne notre curseur en première position
+        //res.moveToFirst();
+        if(res.moveToFirst()) {
+            int i = res.getInt(res.getColumnIndex(dbHelper.RECIPE_ID_RECIPE));
+            String name = res.getString(res.getColumnIndex(dbHelper.RECIPE_NAME_RECIPE));
+            String url = res.getString(res.getColumnIndex(dbHelper.RECIPE_URL_PICTURE));
+            float time = res.getFloat(res.getColumnIndex(dbHelper.RECIPE_TOTAL_TIME));
+            int serving = res.getInt(res.getColumnIndex(dbHelper.RECIPE_SERVINGS_COUNT));
+            User user = daoUser.find(i);
+            Recipe_type dish_type = typeDAO.find(res.getInt(res.getColumnIndex(dbHelper.RECIPE_TYPE_ID_TYPE)));
+            listIngredient = haveDAO.findAll(i);
+
+            steps = stepDAO.findAll(i);
+
+
+            recipe = new Recipe(i, name, url, time, serving, user, dish_type, listIngredient, steps);
+            Log.d("RECIPE_DAO !!!!!!!", "SUCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        }else{
+            Log.d("RECIPE_DAO !!!!!!!", "FAIL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            recipe = new Recipe();
+        }
+
+        res.close();
+
+        return recipe;
     }
 
     @Override
