@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Recettes</string>
     <string name="error_email">Merci de saisir une adresse mail valide</string>
-    <string name="error_login">Merci de saisir une adresse mail valide</string>
-    <string name="error_password_short">Merci de saisir une adresse mail valide</string>
-    <string name="empty_field">Merci de saisir une adresse mail valide</string>
-    <string name="error_password_wrong">Merci de saisir une adresse mail valide</string>
+    <string name="error_login">Le login doit comporter au moins 3 caractères</string>
+    <string name="error_password_short">Le password doit comporter au moins 3 caractères</string>
+    <string name="empty_field">Merci de remplir tous les champs</string>
+    <string name="error_password_wrong">Les mots de passe ne sont pas identiques</string>
+
+    // Datas for Print Recipe
+    <string name="fragment_recette"> Recette </string>
+    <string name="fragment_ingredients"> Ingrédients </string>
+    <string name="fragment_step"> Etape </string>
 </resources>

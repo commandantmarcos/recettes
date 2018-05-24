@@ -36,15 +36,13 @@ public class Recipe_typeDAO extends DAO implements IRecipe_typeDAO {
     public Recipe_type find(int id) {
         open();
         Log.d("HERE TYPEDAO !!!!!", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_RECIPE_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
+        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_RECIPE_TYPE_NAME + " WHERE " + dbHelper.RECIPE_TYPE_ID_TYPE + " = " + id, null);
         cursor.moveToFirst();
 
         if( cursor != null && cursor.moveToFirst() ) {
             int idType = (cursor.getInt(cursor.getColumnIndex(dbHelper.RECIPE_TYPE_ID_TYPE)));
-            Cursor cursor2 = database.rawQuery("select * from " + dbHelper.TABLE_RECIPE_TYPE_NAME + " WHERE " + dbHelper.RECIPE_TYPE_ID_TYPE + " = " + idType, null);
-
-            if( cursor2 != null && cursor2.moveToFirst() )
-                recipe_type = new Recipe_type( idType, (cursor2.getString(cursor2.getColumnIndex(dbHelper.RECIPE_TYPE_TYPE_NAME))) ) ;
+            String name = cursor.getString(cursor.getColumnIndex(dbHelper.RECIPE_TYPE_TYPE_NAME));
+            recipe_type = new Recipe_type( idType, name ) ;
         }
         cursor.close();
 

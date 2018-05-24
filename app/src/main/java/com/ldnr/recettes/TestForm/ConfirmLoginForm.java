@@ -2,96 +2,103 @@ package com.ldnr.recettes.TestForm;
 
 
 import android.content.res.Resources;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldnr.recettes.Activities.CreateLoginActivity;
 import com.ldnr.recettes.Beans.User;
 import com.ldnr.recettes.R;
 
-public class ConfirmLoginForm {
 
-    public User ConfirmNewLoginForm(String login, String email, String password, String confirm_password) {
+public class ConfirmLoginForm extends AppCompatActivity{
 
-        User addUser = new User();
+    static int a;
+    public static int erreur = 0;
+    public int ConfirmNewLoginForm(EditText login, EditText email, EditText password,
+                                   EditText confirm_password) {
 
         try {
-            validLogin(login, addUser);
+            String Login = login.getText().toString();
+            validLogin(Login);
         } catch (Exception e) {
-
+            return 1;
         }
 
         try {
-            validEmail(email, addUser);
+            String Email = email.getText().toString();
+            validEmail(Email);
         } catch (Exception e) {
-
-
+            return 2;
         }
 
         try {
-            validPassword(password, confirm_password, addUser);
+            String Password = password.getText().toString();
+            String ConfirmPassword = confirm_password.getText().toString();
+            validPassword(Password, ConfirmPassword);
         } catch (Exception e) {
-
+            return 3;
         }
 
-        return addUser;
+        return 10;
     }
 
 
     /**
      * Valide l'adresse mail saisie.
      */
-    private void validEmail(String email, User addUser) throws Exception {
-
-        if (!email.isEmpty() && email.trim().length() != 0) {
-                if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-                throw new Exception(" non valide.");
-
+    public void validEmail(String email) throws Exception {
+        if (email != null ) {
+            if (email.isEmpty()){
+                CreateLoginActivity.b = 5;
+                throw new Exception("Merci de saisir une adresse mail.");
             }
-        } else if (email.isEmpty()) {
-            throw new Exception("Merci de saisir une adresse mail.");
-
+            else if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)") ) {
+                CreateLoginActivity.b = 2;
+                throw new Exception(" non valide.");
+            }
         }
-        else addUser.setEmail(email);
-
     }
 
     /**
      * Valide les passwword saisis.
      */
-    public static int validPassword(String password, String confirm_password, User addUser) throws Exception {
-        int i;
-        //Log.d("whath the fuck",password);
-        /*if (!(password.isEmpty() && password.trim().length() == 0 && confirm_password.isEmpty() && confirm_password.trim().length() == 0)) {
-            if (!password.equals(confirm_password)) {
-                throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
-            }else if (password.trim().length() < 3) {
-                throw new Exception("Les mots de passe doivent contenir au moins 3 caractères.");
-            }
-        } else if (password.isEmpty() ) {
+    public void validPassword(String password, String confirm_password) throws Exception {
+
+        if(password.isEmpty() || confirm_password.isEmpty()){
+            CreateLoginActivity.b = 5;
             throw new Exception("Merci de saisir et confirmer votre mot de passe.");
-        }*/
-        if(password.isEmpty() || confirm_password.isEmpty())
-           // throw new Exception("Merci de saisir et confirmer votre mot de passe.");
-            return 5;
-        else if(!password.equals(confirm_password))
-            throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
-        CreateLoginActivity.onErrorCatch(4);
-        else if(password.trim().length() < 3)
+        }
+        if(password.trim().length() < 3) {
+            CreateLoginActivity.b = 3;
             throw new Exception("Les mots de passe doivent contenir au moins 3 caractères.");
-        else  addUser.setPassword(password);
+        }
+        if(!password.equals(confirm_password)) {
+            CreateLoginActivity.b = 4;
+            throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
+        }
+
     }
 
     /**
      *
      * Valide le login d'utilisateur saisi.
      */
-    private void validLogin(String login, User addUser) throws Exception {
-        if (login != null && login.trim().length() < 3) {
-            throw new Exception("3 caractères minimum.");
+    private void validLogin(String login) throws Exception {
+        if (login != null ) {
+            if (login.isEmpty()) {
+                CreateLoginActivity.b = 5;
+                throw new Exception();
+            }
+            if (login.trim().length() < 3) {
+                CreateLoginActivity.b = 1;
+                throw new Exception();
+            }
+
         }
-        else addUser.setLogin(login);
     }
 }
 

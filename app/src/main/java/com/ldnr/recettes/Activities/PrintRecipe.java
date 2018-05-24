@@ -4,15 +4,36 @@
 
 package com.ldnr.recettes.Activities;
 
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ldnr.recettes.R;
-import com.squareup.picasso.Picasso;
 
+public class PrintRecipe extends AppCompatActivity {
+
+    private int id_recipe;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.print_recipe);
+
+            Intent intent = getIntent();
+            id_recipe = Integer.parseInt(intent.getStringExtra("id"));
+
+            this.configureViewPager();
+        }
+
+        private void configureViewPager(){
+            ViewPager pager = (ViewPager)findViewById(R.id.recipe_viewpager);
+            pager.setAdapter(new PageAdapter(getSupportFragmentManager(), id_recipe));
+        }
+}
+
+/**
 public class PrintRecipe extends AppCompatActivity {
     private TextView idView;
     private ImageView url;
@@ -22,7 +43,7 @@ public class PrintRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.print_recipe);
 
-        /*  Catch value from putExtras by MainActivity  */
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String urlS = intent.getStringExtra("url");
@@ -34,4 +55,5 @@ public class PrintRecipe extends AppCompatActivity {
         Picasso.with(url.getContext()).load(urlS).centerCrop().fit().into(url);
 
     }
-}
+}**/
+
