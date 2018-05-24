@@ -2,6 +2,7 @@ package com.ldnr.recettes.Activities;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class NewRecipe extends AppCompatActivity {
     private Spinner ingredients;
     private Spinner unities;
     private EditText number;
+    AlertDialog.Builder builder;
 
 
 
@@ -47,6 +49,7 @@ public class NewRecipe extends AppCompatActivity {
         EditText number = (EditText) findViewById(R.id.number);
         Button ajouter = (Button) findViewById(R.id.button2);
         Button new_ingr = (Button) findViewById(R.id.button);
+        builder = new AlertDialog.Builder(this);
 
         db = new DBHelper(this);
         new_recipe_layout = findViewById(R.id.newRecipeLayout);
@@ -77,25 +80,19 @@ public class NewRecipe extends AppCompatActivity {
         unities.setSelection(0);
     }
 
-    public void onnewingrClicked(View view) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    public Dialog onnewingrClicked(View view) {
 
         builder.setView(R.layout.pop_up);
+
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(getApplicationContext(), "Nouvel ingrédient ajouté!", Toast.LENGTH_LONG).show();
                 //inserer un nouvel ingredient dans la base de données
                 //methode needed
             }
         } );
-        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.create();
+        builder.show();
+        return builder.create();
     }
 
 }
