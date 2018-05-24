@@ -13,6 +13,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.util.Log;
 
 import com.ldnr.recettes.Beans.User;
 import com.ldnr.recettes.ConnectionBDD.DBHelper;
@@ -66,6 +67,7 @@ public class UserDAO extends DAO implements IUserDAO {
         open();
         cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
         // On positionne notre curseur en première position
+        Log.e("I'm HERE", "SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         cursor.moveToFirst();
         // Tant qu’on est pas arrivé à la fin de nos enregistrements :
         if( cursor != null && cursor.moveToFirst() ) {
@@ -130,5 +132,7 @@ public class UserDAO extends DAO implements IUserDAO {
         initialValues.put(dbHelper.USER_LOGIN, user.getLogin());
         initialValues.put(dbHelper.USER_EMAIL, user.getEmail());
         initialValues.put(dbHelper.USER_PASSWORD, user.getPassword() );
+
+        dbHelper.getWritableDatabase().insert(dbHelper.TABLE_USER_NAME, null, initialValues);
     }
 }
