@@ -128,7 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param context Contexte de l'application
      */
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 34);
+        super(context, DATABASE_NAME, null, 39);
     }
 
     /**

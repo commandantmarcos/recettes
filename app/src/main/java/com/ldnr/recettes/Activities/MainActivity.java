@@ -75,22 +75,17 @@ public class MainActivity extends AppCompatActivity {
 
 	// 1 - Configure item click on RecyclerView
 	private void configureOnClickRecyclerView() {
-		Log.e("allez on y croit","kjqdhgjhhdghhjifh///////////////////////////");
 		ItemClickSupport.addTo(recyclerView, R.layout.cell_cards)
 				.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
 					@Override
 					public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-						Log.e("ça plane pour moi","k///////////////drgh///////////");
 						/*	Catch item position	*/
 						Adapter a = new Adapter(recipes);
+						UserDAO users = new UserDAO(recyclerView.getContext());
 						Recipe r = a.getPosition(position);
 						Intent intent = new Intent(recyclerView.getContext(), PrintRecipe.class);
 						/*	Send recipe to next Activity	*/
-						intent.putExtra("id", Integer.toString(r.getId_recipe()));
-						intent.putExtra("name", r.getName());
-						intent.putExtra("url", r.getUrl_picture());
-
-
+						intent.putExtra("id", r.getId_recipe());
 						startActivity(intent);
 					}
 				});
@@ -209,13 +204,10 @@ public class MainActivity extends AppCompatActivity {
 				switch (which) {
 					case 0: // updade
 						showUpdate();
-
-						Log.e("re al con ", "ftyzigyf//////rhz**********tyje----------");
 						break;
 					case 1: // delete
 							showAlertDialogButtonClicked();
 
-						daoRecipe.delete(mposition);
 						break;
 					case 2: // cancel
 						break;

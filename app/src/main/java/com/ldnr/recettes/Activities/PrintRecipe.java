@@ -20,9 +20,11 @@ import android.widget.TextView;
 import com.ldnr.recettes.Beans.Have;
 import com.ldnr.recettes.Beans.Recipe;
 import com.ldnr.recettes.Beans.Step;
+import com.ldnr.recettes.Beans.User;
 import com.ldnr.recettes.DAO.HaveDAO;
 import com.ldnr.recettes.DAO.RecipeDAO;
 import com.ldnr.recettes.DAO.StepDAO;
+import com.ldnr.recettes.DAO.UserDAO;
 import com.ldnr.recettes.R;
 import com.ldnr.recettes.Views.AdapterPrint;
 import com.squareup.picasso.Picasso;
@@ -35,6 +37,7 @@ public class PrintRecipe extends AppCompatActivity {
     private RecipeDAO daoRecipe;
     private HaveDAO daoHave;
     private StepDAO daoStep;
+    private UserDAO userDao;
 
     private List<Have> listHave = new ArrayList<>();
     private List<Step> tabStep = new ArrayList<>();
@@ -58,7 +61,10 @@ public class PrintRecipe extends AppCompatActivity {
 
         // Get Recipe clicked
         daoRecipe = new RecipeDAO(this);
+        userDao = new UserDAO(this);
+
         Recipe recipe = daoRecipe.find(id);
+        User user = userDao.find(id);
 
         Log.e("Null Exception ", "###################################### "+ id+" ###########################################");
 
@@ -69,13 +75,13 @@ public class PrintRecipe extends AppCompatActivity {
             // Construction of string for the recipe's details
             StringBuilder buffer = new StringBuilder();
             buffer.append("Recette ");
-            buffer.append(recipe.getDish_type().getType_name());
+            //buffer.append(recipe.getDish_type().getType_name());
             buffer.append("\n");
             buffer.append("Pour ");
             buffer.append(recipe.getServings_count());
             buffer.append(" personnes\n");
             buffer.append("Postée par : ");
-            buffer.append(recipe.getUser().getLogin());
+            //buffer.append(user.getLogin());
             recipeDetails.setText(buffer);
 
             //

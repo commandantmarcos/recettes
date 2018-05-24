@@ -20,9 +20,9 @@ public class ViewHoldersPrint extends RecyclerView.ViewHolder {
     public ViewHoldersPrint(View itemView) {
         super(itemView);
 
-        step_descr = itemView.findViewById(R.id.p_step_description);
+        /*step_descr = itemView.findViewById(R.id.p_step_description);
         step_num = itemView.findViewById(R.id.p_step_title);
-        step_pic = itemView.findViewById(R.id.p_step_picture);
+        step_pic = itemView.findViewById(R.id.p_step_picture);*/
     }
 
     //puis ajouter une fonction pour remplir la cellule en fonction d'un MyObject

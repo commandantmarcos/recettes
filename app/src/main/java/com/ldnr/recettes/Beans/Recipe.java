@@ -1,5 +1,7 @@
 package com.ldnr.recettes.Beans;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +25,13 @@ public class Recipe {
         this.servings_count = servings_count;
         this.user = user;
         this.dish_type = dish_type;
-        this.listIngredient = new ArrayList<Have>();
-        this.steps = new ArrayList<Step>();
+        this.listIngredient = new ArrayList<>();
+        this.steps = new ArrayList<>();
+
+        Log.e("USERCONSTRUCTOR", user.getLogin());
+            for(int j = 0; j < steps.size(); j++)
+                Log.e("DAOSTEPDESCRITAB", steps.get(j).getStep_description());
+
     }
 
     public Recipe() {

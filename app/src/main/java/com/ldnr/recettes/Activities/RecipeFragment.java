@@ -29,9 +29,11 @@ public class RecipeFragment extends Fragment {
     public static RecipeFragment newInstance(int id_recipe) {
 
         RecipeFragment recipeFragment = new RecipeFragment();
-
+        Log.e("NEWINSTANCEMF** !!!!", Integer.toString(id_recipe));
         Bundle args = new Bundle();
-        args.putInt(KEY_ID_RECIPE, id_recipe);
+        //args.putInt(KEY_ID_RECIPE, id_recipe);
+        args.putInt("key", id_recipe);
+        Log.e("CLIQUE !!!!", Integer.toString(args.getInt("key")));
         recipeFragment.setArguments(args);
 
         return(recipeFragment);

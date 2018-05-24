@@ -20,6 +20,7 @@
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.CreateLoginActivity" />
         <activity android:name=".Activities.PrintRecipe"></activity>
+        <activity android:name=".Activities.Update"></activity>
     </application>
 
 </manifest>

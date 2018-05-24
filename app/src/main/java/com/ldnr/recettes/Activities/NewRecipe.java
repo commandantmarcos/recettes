@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.ldnr.recettes.Beans.Have;
 import com.ldnr.recettes.Beans.Ingredient;
 import com.ldnr.recettes.ConnectionBDD.DBHelper;
+import com.ldnr.recettes.DAO.IngredientDAO;
+import com.ldnr.recettes.DAO.UnitsDAO;
 import com.ldnr.recettes.R;
 
 import java.util.ArrayList;
@@ -28,10 +30,11 @@ import java.util.List;
 
 public class NewRecipe extends AppCompatActivity {
 
-    private DBHelper db;
+    private IngredientDAO daoIngr;
+    private UnitsDAO unitsDao;
     private List<String> allIngredients = new ArrayList<>();
     private List<String> allUnities = new ArrayList<>();
-
+    private List<Ingredient> ingrs = new ArrayList<>();
     private LinearLayout new_recipe_layout;
     private Spinner ingredients;
     private Spinner unities;
@@ -44,22 +47,23 @@ public class NewRecipe extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_recipe);
-        Spinner ingredients = (Spinner) findViewById(R.id.bbox_ingredients);
-        Spinner unities = (Spinner) findViewById(R.id.bbox_unity);
-        EditText number = (EditText) findViewById(R.id.number);
-        Button ajouter = (Button) findViewById(R.id.button2);
-        Button new_ingr = (Button) findViewById(R.id.button);
+        daoIngr = new IngredientDAO(this);
+        unitsDao = new UnitsDAO(this);
+        ingrs = daoIngr.findAll();
+        Spinner ingredients = findViewById(R.id.bbox_ingredients);
+        Spinner unities =  findViewById(R.id.bbox_unity);
+        EditText number = findViewById(R.id.number);
+        Button ajouter = findViewById(R.id.button2);
+        Button new_ingr = findViewById(R.id.button);
         builder = new AlertDialog.Builder(this);
 
-        db = new DBHelper(this);
+        //db = new DBHelper(this);
         new_recipe_layout = findViewById(R.id.newRecipeLayout);
 
-
-       // allIngredients.add(getallIngredients());
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allIngredients);
         ingredients.setAdapter(dataAdapter);
 
-       // allUnities.add(getallUnities());
+        allUnities = unitsDao.findAll();
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allUnities);
         unities.setAdapter(dataAdapter2);
     }

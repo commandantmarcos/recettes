@@ -65,14 +65,17 @@ public class UserDAO extends DAO implements IUserDAO {
     @Override
     public User find(int id) {
         open();
-        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
-        // On positionne notre curseur en première position
-        Log.e("I'm HERE", "SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        cursor.moveToFirst();
-        // Tant qu’on est pas arrivé à la fin de nos enregistrements :
-        if( cursor != null && cursor.moveToFirst() ) {
-            user = new User(cursor.getInt(cursor.getColumnIndex(dbHelper.USER_ID_USER)),(cursor.getString(cursor.getColumnIndex(dbHelper.USER_LOGIN))),
-                    (cursor.getString(cursor.getColumnIndex(dbHelper.USER_EMAIL))), (cursor.getString(cursor.getColumnIndex(dbHelper.USER_PASSWORD))) );
+        try {
+            cursor = database.rawQuery("select * from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null);
+            // On positionne notre curseur en première position
+            cursor.moveToFirst();
+            // Tant qu’on est pas arrivé à la fin de nos enregistrements :
+            if (cursor != null && cursor.moveToFirst()) {
+                user = new User(cursor.getInt(cursor.getColumnIndex(dbHelper.USER_ID_USER)), (cursor.getString(cursor.getColumnIndex(dbHelper.USER_LOGIN))),
+                        (cursor.getString(cursor.getColumnIndex(dbHelper.USER_EMAIL))), (cursor.getString(cursor.getColumnIndex(dbHelper.USER_PASSWORD))));
+            }
+        }catch (SQLException s){
+            Log.e("ERREURSQL", s.getMessage());
         }
         cursor.close();
 
@@ -81,7 +84,25 @@ public class UserDAO extends DAO implements IUserDAO {
 
     @Override
     public User find(String name) {
-        return null;
+
+        open();
+        try {
+        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.USER_LOGIN + " = " + name, null );
+        // On positionne notre curseur en première position
+
+        cursor.moveToFirst();
+        // Tant qu’on est pas arrivé à la fin de nos enregistrements :
+
+        if( cursor != null && cursor.moveToFirst() ) {
+            user = new User(cursor.getInt(cursor.getColumnIndex(dbHelper.USER_ID_USER)),(cursor.getString(cursor.getColumnIndex(dbHelper.USER_LOGIN))),
+                    (cursor.getString(cursor.getColumnIndex(dbHelper.USER_EMAIL))), (cursor.getString(cursor.getColumnIndex(dbHelper.USER_PASSWORD))) );
+        }
+        }catch (SQLException s){
+            Log.e("ERREURSQL", s.getMessage());
+        }
+        cursor.close();
+
+        return user;
     }
 
     @Override

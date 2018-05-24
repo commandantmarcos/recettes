@@ -54,8 +54,9 @@ public class LoginActivity extends AppCompatActivity {
         localPassword = user_password.getText().toString();
 
         /**Récupération des login et MDP de l'user pour la comparaison avec la BDD*/
-        /*localUser = new UserDAO.find(localLogin);
-        login_user = localUser.getLogin();
+        UserDAO userDao = new UserDAO(view.getContext());
+        localUser = userDao.find(user_login.getText().toString());
+        /*login_user = localUser.getLogin();
         password_user = localUser.getPassword();*/
 
         if (Objects.equals( localLogin, login_user ) && Objects.equals( localPassword, password_user )) {

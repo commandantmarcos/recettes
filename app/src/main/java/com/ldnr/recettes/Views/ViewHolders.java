@@ -32,7 +32,6 @@ public class ViewHolders extends RecyclerView.ViewHolder {
 
         // Ici nous utilisons Picasso binder l'image depuis une URL à notre imageView.
         Picasso.with(recipe_pic.getContext()).load(recipe.getUrl_picture()).centerCrop().fit().into(recipe_pic);
-        Log.d("NAME RECIPE", recipe.getUrl_picture());
 
     }
 }
