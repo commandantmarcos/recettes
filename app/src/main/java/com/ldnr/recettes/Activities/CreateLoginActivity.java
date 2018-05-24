@@ -76,6 +76,7 @@ import java.util.Objects;
 //            b = newLogin.ConfirmNewLoginForm(login, email, password, confirm_password);
             newLogin.ConfirmNewLoginForm(login, email, password, confirm_password);
 
+            //blablablalbaalbalbalabla
             switch (b) {
                 case 1:
                     error_login.setText("Le login doit avoir au moins 3 caractères");
