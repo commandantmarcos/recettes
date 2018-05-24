@@ -26,7 +26,19 @@ public class IngredientDAO extends DAO implements IIngredientDAO {
 
     @Override
     public Ingredient find(int id) {
-        return null;
+
+        Ingredient lists;
+        Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_INGREDIENT_NAME + " WHERE " + id + " = " + dbHelper.INGREDIENT_ID_INGREDIENT, null );
+        // On positionne notre curseur en première position
+        res.moveToFirst();
+        // Tant qu’on est pas arrivé à la fin de nos enregistrements :
+        int i = res.getInt(res.getColumnIndex(dbHelper.INGREDIENT_ID_INGREDIENT));
+        String name = res.getString(res.getColumnIndex(dbHelper.INGREDIENT_NAME));
+
+        lists = new Ingredient(i, name);
+        //lists.add(new Ingredient(res.getInt(res.getColumnIndex(dbHelper.INGREDIENT_ID_INGREDIENT))), res.getString(res.getColumnIndex(dbHelper.INGREDIENT_NAME)));
+        res.close();
+        return lists;
     }
 
     @Override

@@ -96,9 +96,11 @@ import com.ldnr.recettes.TestForm.ConfirmLoginForm;
                     Log.d("tag","?????????????????????????????????");
                     user = new User(login.getText().toString(), email.getText().toString(),
                                password.getText().toString());
-                   // UserDAO.create(user);
+                    UserDAO userCreate = new UserDAO(this);
+                    user = userCreate.create(user);
                     Intent homeIntent = new Intent(this, MainActivity.class);
                     startActivity(homeIntent);
+                    break;
             }
         }
     }
