@@ -46,8 +46,14 @@ public class RecipeFragment extends Fragment {
         TextView textView_title = (TextView) result.findViewById(R.id.recipe_title);
         TextView textView_description = (TextView) result.findViewById(R.id.recipe_description);
 
-        // Get data from the Bundle
-        int id_recipe = getArguments().getInt(KEY_ID_RECIPE, -1);
+        int id_recipe = -1;
+
+        try {
+            // Get data from the Bundle
+            id_recipe = getArguments().getInt(KEY_ID_RECIPE, -1);
+        }catch (Exception e){
+            // TODO : gestion exception
+        }
 
         //Get recipe from database
         RecipeDAO daoRecipe = new RecipeDAO(this.getContext());
