@@ -19,37 +19,48 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="128dp"
+        android:orientation="vertical">
 
         <Spinner
             android:id="@+id/bbox_ingredients"
             android:layout_width="266dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
             android:hint="Selectionnez un ingrédient"
             android:visibility="visible" />
 
-        <EditText
-            android:id="@+id/number"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Quantity"
-            android:visibility="visible"
-            tools:textSize="10sp" />
-
-        <Spinner
-            android:id="@+id/bbox_unity"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@id/bbox_unity"
-            android:hint="Selectionnez une unité"
-            android:visibility="visible" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Quantité"
+                android:visibility="visible"
+                tools:textSize="10sp" />
+
+            <Spinner
+                android:id="@+id/bbox_unity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:entries="@id/bbox_unity"
+                android:hint="Selectionnez une unité"
+                android:visibility="visible" />
+        </LinearLayout>
     </LinearLayout>
-        <Button
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
@@ -60,6 +71,7 @@
             android:layout_width="235dp"
             android:layout_height="37dp"
             android:text="Nouvel Ingredient"
-            android:visibility="visible" />
-
-</LinearLayout>
+            android:visibility="visible"
+            android:onClick="onnewingrClicked"/>
+    </LinearLayout>
+    </LinearLayout>

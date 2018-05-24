@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ldnr.recettes.Beans.User;
+import com.ldnr.recettes.DAO.UserDAO;
 import com.ldnr.recettes.R;
 
 import java.util.Objects;
@@ -17,51 +20,54 @@ public class LoginActivity extends AppCompatActivity {
 
     private String localLogin;
     private String localPassword;
+    private String login_user ;
+    private String password_user;
     private Resources res;
+    EditText user_login;
+    EditText user_password;
+    TextView connect_error;
+    User localUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        res = getResources();
+
+        user_login = findViewById(R.id.user_login);
+        user_password = findViewById(R.id.user_password);
+        connect_error = findViewById(R.id.connect_error);
+
+        user_login = new EditText(this);
+        user_password = new EditText(this);
+        connect_error = new TextView(this);
     }
 
 
-        // get login password from resources
-      /*  res = getResources();
-        localLogin = res.getString( R.string.local_login );
-        localPassword = res.getString( R.string.local_password );
-    }
 
     public void onLoginClicked(View view) {
-        // On recupere les edit Text
-        EditText eLogin = findViewById( R.id.user_login );
-        EditText ePassw = findViewById( R.id.user_password );
+         user_login = findViewById( R.id.user_login );
+         user_password = findViewById( R.id.user_password );
+         connect_error = findViewById(R.id.connect_error);
 
-        // On recupère leur contenu
-        String userLogin = eLogin.getText().toString();
-        String userPassword = ePassw.getText().toString();
+        localLogin = user_login.getText().toString();
+        localPassword = user_password.getText().toString();
 
-        // On teste login / mdp
-        if (Objects.equals( userLogin, localLogin ) && Objects.equals( userPassword, localPassword )) {
-            // Si OK un petit message
-            Toast.makeText( this, res.getString(R.string.success_login), Toast.LENGTH_LONG).show();
-            // Et on lance l'activité PrintRecipe
+        /**Récupération des login et MDP de l'user pour la comparaison avec la BDD*/
+        /*localUser = new UserDAO.find(localLogin);
+        login_user = localUser.getLogin();
+        password_user = localUser.getPassword();*/
+
+        if (Objects.equals( localLogin, login_user ) && Objects.equals( localPassword, password_user )) {
+            connect_error.setText("Connection réussie!");
             Intent connectIntent = new Intent(this, PrintRecipe.class);
             startActivity( connectIntent );
-        } else {
-            // Sinon on met les champs à blanc
-            eLogin.setText( null );
-            ePassw.setText( null );
-            // Et on prévient l'utilisateur
-            Toast.makeText( this, res.getString(R.string.error_login), Toast.LENGTH_LONG).show();
         }
-    }*/
-
-    public void onLoginClicked(View view) {
-
-        Intent loginIntent = new Intent(this, PrintRecipe.class);
-        startActivity(loginIntent);
-
+        else {
+            user_login.setText( null );
+            user_password.setText( null );
+            connect_error.setText("Veuillez vérifier vos identifiants.");
+        }
     }
 }
 
