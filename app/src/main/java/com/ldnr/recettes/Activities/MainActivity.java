@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 		//cet adapter servira à remplir notre recyclerview
 		recyclerView.setAdapter(new Adapter(recipes));
 		configureOnClickRecyclerView();
+		configureOnClickLongRecyclerView();
 
 	}
 
@@ -81,6 +82,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 						startActivity(intent);
+					}
+				});
+	}
+
+	/*	Gestion du clique long	*/
+	private void configureOnClickLongRecyclerView() {
+		ItemClickSupport.addTo(recyclerView, R.layout.cell_cards)
+				.setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
+
+					@Override
+					public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
+						Log.d("JE SUIS DANS LONGCLICK", "#################################################################################");
+						return false;
 					}
 				});
 	}
