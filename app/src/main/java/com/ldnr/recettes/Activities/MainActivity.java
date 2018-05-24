@@ -2,8 +2,7 @@
 
 package com.ldnr.recettes.Activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,18 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
-import com.ldnr.recettes.Beans.Ingredient;
 import com.ldnr.recettes.Beans.Recipe;
-import com.ldnr.recettes.Beans.Recipe_type;
-import com.ldnr.recettes.Beans.Step;
-import com.ldnr.recettes.Beans.User;
-import com.ldnr.recettes.DAO.IngredientDAO;
 import com.ldnr.recettes.DAO.RecipeDAO;
-import com.ldnr.recettes.DAO.StepDAO;
-import com.ldnr.recettes.DAO.UserDAO;
 import com.ldnr.recettes.R;
 import com.ldnr.recettes.Views.Adapter;
 import com.ldnr.recettes.Views.ItemClickSupport;
@@ -79,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 						intent.putExtra("id", Integer.toString(r.getId_recipe()));
 						intent.putExtra("name", r.getName());
 						intent.putExtra("url", r.getUrl_picture());
-
 
 						startActivity(intent);
 					}
