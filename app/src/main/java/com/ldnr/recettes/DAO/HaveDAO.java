@@ -16,6 +16,7 @@ import android.database.SQLException;
 
 
 import com.ldnr.recettes.Beans.Have;
+import com.ldnr.recettes.Beans.Ingredient;
 import com.ldnr.recettes.ConnectionBDD.DBHelper;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class HaveDAO extends DAO implements IHaveDAO {
     private ContentValues initialValues;
     private String[] allColumns = { dbHelper.INGREDIENT_ID_INGREDIENT, dbHelper.RECIPE_ID_RECIPE, dbHelper.UNITY_ID_UNITY, dbHelper.HAVE_INGR_COUNT };
     private Have have = null;
+    private IngredientDAO daoIng;
 
     /**
      * Constructor by default
@@ -36,6 +38,7 @@ public class HaveDAO extends DAO implements IHaveDAO {
      */
     public HaveDAO(Context context) {
         super(context);
+        daoIng = new IngredientDAO(context);
     }
 
     @Override
@@ -76,15 +79,21 @@ public class HaveDAO extends DAO implements IHaveDAO {
     @Override
     public List<Have> findAll(int id_recipe) {
         List<Have> listHave = new ArrayList<>();
-        cursor = database.rawQuery("SELECT * FROM " + dbHelper.TABLE_HAVE_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id_recipe , null );
+
+        cursor = database.rawQuery("SELECT * FROM " + dbHelper.TABLE_HAVE_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id_recipe  , null );
         cursor.moveToFirst();
+
 
         if( cursor != null && cursor.moveToFirst() ){
             while(cursor.isAfterLast()) {
                 // TODO : accéder à ingrédient !!
 
-                //listHave.add(new Have((cursor.getClass(cursor.getColumnIndex(dbHelper.INGREDIENT_ID_INGREDIENT))), (cursor.getInt(cursor.getColumnIndex(dbHelper.RECIPE_ID_RECIPE))), (cursor.getInt(cursor.getColumnIndex(dbHelper.UNITY_ID_UNITY)))), (cursor.getInt(cursor.getColumnIndex(dbHelper.HAVE_INGR_COUNT)))) );
+                int id_ing = cursor.getInt(cursor.getColumnIndex(dbHelper.INGREDIENT_ID_INGREDIENT));
+                Ingredient Ingr = daoIng.find(id_ing);
+                listHave.add(new Have(Ingr, (cursor.getString(cursor.getColumnIndex(dbHelper.HAVE_INGR_COUNT))),
+                        (cursor.getString(cursor.getColumnIndex(dbHelper.UNITY_UNITY_TYPE)))) );
                 cursor.moveToNext();
+
             }
             cursor.close();
         }
