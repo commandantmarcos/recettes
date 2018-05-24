@@ -156,8 +156,15 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
     @Override
     public void delete(Recipe old_recipe) {
         open();
+        Log.d("TAILLE STEP DANS RECIPE: ", Integer.toString(old_recipe.getSteps().size()));
+        //Step old_step = stepDAO.find(old_recipe.getSteps().get(0).getId_step());
+       /* List<Step> steps = new ArrayList<>();
+        List<Step> steps = stepDAO.findAll(old_recipe.getSteps().get(0).getId_step());
+        Log.d("DAO_RECIPE8DELETE", "JE RECUPERE L ID DE LA RECIPE SOIT " + Integer.toString(old_recipe.getSteps().get(0).getId_step()));*/
         database.delete(dbHelper.TABLE_RECIPE_NAME, dbHelper.RECIPE_ID_RECIPE + " = ?",
                 new String[]{String.valueOf(old_recipe.getId_recipe())});
+       /* for(int i = 0; i < steps.size(); i++)
+            stepDAO.delete(steps.get(i));*/
         close();
     }
 

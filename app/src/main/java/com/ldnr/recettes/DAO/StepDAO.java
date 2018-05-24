@@ -29,7 +29,7 @@ public class StepDAO extends DAO implements IStepDAO {
     public Step find(int id) {
         Step step;
 
-        Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_STEP_NAME + "WHERE " + dbHelper.RECIPE_ID_RECIPE + " = id",  null );
+        Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_STEP_NAME + " WHERE " + dbHelper.STEP_ID_STEP + " = " + id,  null );
         // On positionne notre curseur en première position
         res.moveToFirst();
         // Tant qu’on est pas arrivé à la fin de nos enregistrements :
@@ -60,7 +60,7 @@ public class StepDAO extends DAO implements IStepDAO {
     @Override
     public List<Step> findAll(int id) {
         List<Step> steps = new ArrayList<>();
-        Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_STEP_NAME, null );
+        Cursor res = dbHelper.getReadableDatabase().rawQuery( "select * from " + dbHelper.TABLE_STEP_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
         // On positionne notre curseur en première position
         res.moveToFirst();
         // Tant qu’on est pas arrivé à la fin de nos enregistrements :
@@ -110,6 +110,17 @@ public class StepDAO extends DAO implements IStepDAO {
 
     @Override
     public void delete(Step old_step) {
+
+    }
+
+
+    public void delete(List<Step> old_step) {
+        open();
+        for(int i = 0; i < old_step.size(); i++) {
+            database.delete(dbHelper.TABLE_STEP_NAME, dbHelper.STEP_ID_STEP + " = ?",
+                    new String[]{String.valueOf(old_step.get(i).getId_step())});
+        }
+        close();
 
     }
 }

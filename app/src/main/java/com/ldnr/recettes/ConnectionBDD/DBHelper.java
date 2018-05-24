@@ -83,7 +83,9 @@ public class DBHelper extends SQLiteOpenHelper {
             STEP_ID_STEP + " integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
             STEP_STEP_NUM + " integer NOT NULL, " +
             STEP_URL_STEP + " text NOT NULL, " +
-            STEP_STEP_DESCRIBE + " text NOT NULL) ";
+            STEP_STEP_DESCRIBE + " text NOT NULL, " +
+            RECIPE_ID_RECIPE + " integer NOT NULL, " +
+            " CONSTRAINT Recipe_id_FK FOREIGN KEY (" + RECIPE_ID_RECIPE + ") REFERENCES Recipe_type(" + RECIPE_ID_RECIPE + ") ON DELETE CASCADE )";
 
     private static final String SQL_CREATE_RECIPE = " CREATE TABLE " + TABLE_RECIPE_NAME + " ( " +
             RECIPE_ID_RECIPE + " integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
@@ -91,10 +93,8 @@ public class DBHelper extends SQLiteOpenHelper {
             RECIPE_URL_PICTURE + " text NOT NULL, " +
             RECIPE_TOTAL_TIME + " real NOT NULL, " +
             RECIPE_TYPE_ID_TYPE + " integer NOT NULL, " +
-            STEP_ID_STEP + " integer NOT NULL, " +
             RECIPE_SERVINGS_COUNT + " integer NOT NULL, " +
-            " CONSTRAINT Recipe_Recipe_type_FK FOREIGN KEY (" + RECIPE_TYPE_ID_TYPE + ") REFERENCES Recipe_type(" + RECIPE_TYPE_ID_TYPE + "), " +
-            " CONSTRAINT Recipe_Step0_FK FOREIGN KEY (" + STEP_ID_STEP + ") REFERENCES Step(" + STEP_ID_STEP + ") ) ";
+            " CONSTRAINT Recipe_Recipe_type_FK FOREIGN KEY (" + RECIPE_TYPE_ID_TYPE + ") REFERENCES Recipe_type(" + RECIPE_TYPE_ID_TYPE + ") ON DELETE CASCADE )";
 
     private static final String SQL_CREATE_USER = " CREATE TABLE " + TABLE_USER_NAME + " ( " +
             USER_ID_USER + " integer PRIMARY KEY AUTOINCREMENT, " +
@@ -128,7 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param context Contexte de l'application
      */
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 20);
+        super(context, DATABASE_NAME, null, 28);
     }
 
     /**
@@ -261,27 +261,33 @@ public class DBHelper extends SQLiteOpenHelper {
         List<String> name = new ArrayList<>();
         List<String> url = new ArrayList<>();
         List<String> description = new ArrayList<>();
+        List<String> id_recipe = new ArrayList<>();
 
         name.add("1");
         url.add("https://image.afcdn.com/recipe/20131023/45431_w600.jpg");
         description.add("Couper votre pain en tranche");
+        id_recipe.add("1");
 
         name.add("2");
         url.add("http://www.regal.fr/sites/art-de-vivre/files/styles/large/public/r30_tartine-beurre_fo.jpg?itok=LdDAuwla");
         description.add("Etaler le beurre sur votre tranche");
+        id_recipe.add("1");
 
         name.add("1");
         url.add("https://image.afcdn.com/recipe/20131023/45431_w600.jpg");
         description.add("Couper votre pain en tranche");
+        id_recipe.add("2");
 
         name.add("2");
         url.add("https://img2.topsante.com/var/topsante/storage/images/nutrition-et-recettes/equilibre-alimentaire/conseils-dietetiques/nutrition-une-pate-a-tartiner-maison-allegee-10783/88298-2-fre-FR/Nutrition-une-pate-a-tartiner-maison-allegee_width1024.jpg");
         description.add("Etaler votre chocolat bio fait maison sur votre tranche de pain bio et fait maison");
+        id_recipe.add("2");
 
         for(int i = 0; i < name.size(); i++){
             value.put(STEP_STEP_NUM, name.get(i));
             value.put(STEP_URL_STEP, url.get(i));
             value.put(STEP_STEP_DESCRIBE, description.get(i));
+            value.put(RECIPE_ID_RECIPE, Integer.parseInt(id_recipe.get(i)));
             db.insert(TABLE_STEP_NAME, null, value);
         }
     }
@@ -313,8 +319,6 @@ public class DBHelper extends SQLiteOpenHelper {
         value.put(RECIPE_TOTAL_TIME, 3.5);
         value.put(RECIPE_SERVINGS_COUNT, 4);
         value.put(RECIPE_TYPE_ID_TYPE, 3);
-        value.put(STEP_ID_STEP, 1);
-        value.put(STEP_ID_STEP, 2);
 
         db.insert(TABLE_RECIPE_NAME, null, value);
 
@@ -323,8 +327,6 @@ public class DBHelper extends SQLiteOpenHelper {
         value.put(RECIPE_TOTAL_TIME, 3.5);
         value.put(RECIPE_SERVINGS_COUNT, 2);
         value.put(RECIPE_TYPE_ID_TYPE, 3);
-        value.put(STEP_ID_STEP, 3);
-        value.put(STEP_ID_STEP, 4);
 
         db.insert(TABLE_RECIPE_NAME, null, value);
 
