@@ -167,7 +167,17 @@ public class RecipeDAO extends DAO implements IRecipeDAO {
             stepDAO.delete(steps.get(i));*/
         close();
     }
-
+    public void delete(int id) {
+        open();
+        Cursor res = dbHelper.getWritableDatabase().rawQuery( "delete from " + dbHelper.TABLE_RECIPE_NAME + " WHERE " + dbHelper.RECIPE_ID_RECIPE + " = " + id, null );
+        res.moveToFirst();
+        //stepDAO.delete(old_recipe.getSteps());
+        /*database.delete(dbHelper.TABLE_RECIPE_NAME, dbHelper.RECIPE_ID_RECIPE + " = ?",
+                new String[]{String.valueOf(old_recipe.getId_recipe())});*/
+       /* for(int i = 0; i < steps.size(); i++)
+            stepDAO.delete(steps.get(i));*/
+        close();
+    }
     public ContentValues getInitialValues() {
         return initialValues;
     }
