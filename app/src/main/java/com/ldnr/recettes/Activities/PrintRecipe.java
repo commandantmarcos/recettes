@@ -57,13 +57,16 @@ public class PrintRecipe extends AppCompatActivity {
 
         // Get Extra
         Intent intent = getIntent();
-        int id = intent.getIntExtra("id", 0);
+        String ids = intent.getStringExtra("id");
+        int id = Integer.parseInt(ids);
 
         // Get Recipe clicked
         daoRecipe = new RecipeDAO(this);
         userDao = new UserDAO(this);
 
         Recipe recipe = daoRecipe.find(id);
+        Log.e("Null Exception ", "###################################### "+ recipe.getName() +" ###########################################");
+
         User user = userDao.find(id);
 
         Log.e("Null Exception ", "###################################### "+ id+" ###########################################");
@@ -81,7 +84,7 @@ public class PrintRecipe extends AppCompatActivity {
             buffer.append(recipe.getServings_count());
             buffer.append(" personnes\n");
             buffer.append("Postée par : ");
-            //buffer.append(user.getLogin());
+            buffer.append(user.getLogin());
             recipeDetails.setText(buffer);
 
             //

@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 						Recipe r = a.getPosition(position);
 						Intent intent = new Intent(recyclerView.getContext(), PrintRecipe.class);
 						/*	Send recipe to next Activity	*/
-						intent.putExtra("id", r.getId_recipe());
+						intent.putExtra("id", Integer.toString(r.getId_recipe()));
 						startActivity(intent);
 					}
 				});
@@ -109,21 +109,6 @@ public class MainActivity extends AppCompatActivity {
 				});
 	}
 
-	private void deleteOnClickRecyclerView() {
-		ItemClickSupport.addTo(recyclerView, R.layout.cell_cards)
-				.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-					@Override
-					public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-						/*	Catch item position	*/
-						Log.d("test delete", "******************////////////////////////");
-						Adapter a = new Adapter(recipes);
-						Recipe r = a.getPosition(position);
-						 RecipeDAO recipeDAO = new RecipeDAO(recyclerView.getContext());
-						 //recipeDAO.delete();
-					}
-				});
-	}
-
 
 	/*	Gestion du clique long	*/
 	private void configureOnClickLongRecyclerView() {
@@ -137,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 						Recipe r = a.getPosition(position);
 						mposition = r.getId_recipe();
 						showAlertDialog(recyclerView);
-						Log.d("JE SUIS DANS LONGCLICK", "#################################################################################");
+						//Log.d("JE SUIS DANS LONGCLICK", "#################################################################################");
 						return false;
 					}
 				});
