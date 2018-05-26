@@ -8,26 +8,6 @@
     tools:context="com.ldnr.recettes.Activities.MainActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-
-        <Button android:id="@+id/button_connect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onConnectClicked"
-            android:text="Connexion" />
-
-        <Button android:id="@+id/button_signIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCreateLoginClicked"
-            android:text="Inscription"/>
-
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
