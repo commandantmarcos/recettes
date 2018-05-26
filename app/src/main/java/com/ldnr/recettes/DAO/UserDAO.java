@@ -87,7 +87,7 @@ public class UserDAO extends DAO implements IUserDAO {
 
         open();
         try {
-        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.USER_LOGIN + " = " + name, null );
+        cursor = database.rawQuery( "select * from " + dbHelper.TABLE_USER_NAME + " WHERE " + dbHelper.USER_LOGIN + " = '"+name+"' " , null );
         // On positionne notre curseur en première position
 
         cursor.moveToFirst();

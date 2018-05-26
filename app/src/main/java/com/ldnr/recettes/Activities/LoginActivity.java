@@ -56,12 +56,12 @@ public class LoginActivity extends AppCompatActivity {
         /**Récupération des login et MDP de l'user pour la comparaison avec la BDD*/
         UserDAO userDao = new UserDAO(view.getContext());
         localUser = userDao.find(user_login.getText().toString());
-        /*login_user = localUser.getLogin();
-        password_user = localUser.getPassword();*/
+        login_user = localUser.getLogin();
+        password_user = localUser.getPassword();
 
         if (Objects.equals( localLogin, login_user ) && Objects.equals( localPassword, password_user )) {
             connect_error.setText("Connection réussie!");
-            Intent connectIntent = new Intent(this, PrintRecipe.class);
+            Intent connectIntent = new Intent(this, MainActivity.class);
             startActivity( connectIntent );
         }
         else {
